@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Start Live Production Web Server (Apache)
+Comment=Launches your newly compiled portable Apache server and keeps terminal open
+Exec=bash -c 'cd "$(dirname "%k")/Servers-linux/apache-server" && ./StartWeb.sh'
+Icon=network-server
+Terminal=true

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Stop Web Server (Linux)
+Comment=Shuts down the standard PHP development web server
+Exec=bash -c 'cd "$(dirname "%k")/Servers-linux/php-desktop" && ./StopWeb.sh'
+Icon=process-stop
+Terminal=true

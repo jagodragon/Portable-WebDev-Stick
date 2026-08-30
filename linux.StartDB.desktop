@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Start Portable MariaDB
+Comment=Launches the portable server from its new nested location
+Exec=bash -c 'cd "$(dirname "%k")/Servers-linux/mariadb-12.3.3-linux" && ./StartDB.sh'
+Icon=utilities-terminal
+Terminal=true

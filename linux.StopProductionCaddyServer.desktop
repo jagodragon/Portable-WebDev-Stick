@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Stop Production Web Server
+Comment=Safely terminates Caddy and background FastCGI web processes
+Exec=bash -c 'cd "$(dirname "%k")/Servers-linux/php-desktop" && ./StopProduction.sh'
+Icon=process-stop
+Terminal=true
