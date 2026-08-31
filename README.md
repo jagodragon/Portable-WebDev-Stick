@@ -29,7 +29,8 @@ Execution commands run directly within standard user-space and require **zero** 
 
 *   **Start Database Server:** Double-click `linux.StartDB.desktop` to initialize your local MariaDB instance over network port `3306`.
 *   **Start Production Web Server:** Double-click `linux.StartProductionServer.desktop`. This boots your background FastCGI process, starts Caddy, and automatically slides your default browser open to `http://127.0.0.1:8080`.
-*   **Stop Production Server:** Double-click `linux.StopProductionServer.desktop` to sweep background port listeners and drop threads instantly.
+*   ***(IF Production Web Server Fails to load)Start Backup Web Server:*** Double-click `linux.StartBackupServer-Caddy.bat`
+*   **Stop Production Server:** Double-click `linux.StopProductionServer.desktop` to sweep background port listeners and drop threads instantly. (This should also stop the backup web server)
 *   **Stop Database Server:** Double-click `linux.StopDB.desktop` to safely park your tables and commit transactional data structures to disk layout segments.
 
 ## 🪟 Windows Operation Dashboard (x64 Architectures)
@@ -38,8 +39,9 @@ Automated tracking batch wrappers handle standard Windows shell loop configurati
 
 *   **Start Database Server:** Double-click `win.StartDB.bat`.
 *   **Start Production Web Server:** Double-click `win.StartProductionServer.bat`.
+*   ***(IF Production Web Server Fails to load)Start Backup Web Server:*** Double-click `win.StartBackupServer-Caddy.bat`
 *   **Stop Production Server:** Double-click `win.StopProductionServer.bat`.
-*   **Stop Database Server:** Double-click `win.StopDB.bat`.
+*   **Stop Database Server:** Double-click `win.StopDB.bat`. (This should also stop the backup web server)
 
 ## 🛠️ Global Application Database Connection Adapter (`www/config.php`)
 
