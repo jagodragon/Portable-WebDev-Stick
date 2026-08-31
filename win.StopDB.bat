@@ -1,9 +1,3 @@
-@echo off
-cd /d "%~dp0"
-
-echo 🛑 Stopping Portable MariaDB Database Process Tree safely...
-:: Force close the Windows engine thread to prevent dangling file table descriptor locks
-taskkill /f /im mysqld.exe 2>nul
-
-echo ✅ Database processing loops terminated cleanly.
-timeout /t 1 /nobreak >nul
+version https://git-lfs.github.com/spec/v1
+oid sha256:e2be74e916407f0d47449e89c91e3db5d3a03f9a07f2d7419761499f43a9c1b0
+size 298

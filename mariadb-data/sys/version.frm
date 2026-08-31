@@ -1,17 +1,3 @@
-TYPE=VIEW
-query=select \'1.5.2\' AS `sys_version`,version() AS `mysql_version`
-md5=4e2508b71654f19bd9553eeabf2918f2
-updatable=0
-algorithm=0
-definer_user=mariadb.sys
-definer_host=localhost
-suid=0
-with_check_option=0
-timestamp=0001787869621700616
-create-version=2
-source=SELECT \'1.5.2\' AS sys_version,\n        version() AS mysql_version;
-client_cs_name=utf8mb3
-connection_cl_name=utf8mb3_general_ci
-view_body_utf8=select \'1.5.2\' AS `sys_version`,version() AS `mysql_version`
-sql_path=CURRENT_SCHEMA
-mariadb-version=120303
+version https://git-lfs.github.com/spec/v1
+oid sha256:0eb6876e83eb10fd9ae7abc3e567c6c33914c3dcbfccdb6508fc678d33815ff5
+size 525

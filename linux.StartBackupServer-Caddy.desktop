@@ -1,8 +1,3 @@
-[Desktop Entry]
-Type=Application
-Name=Start Backup Web Server (Caddy Fallback)
-Comment=Fires up background PHP and boots your backup Caddy proxy engine
-Exec=bash -c 'USB_ROOT=$PWD; (cd "$USB_ROOT/Servers-linux/php-desktop" && ./php-bin -S 127.0.0.1:9000 -t "$USB_ROOT/www" &); sleep 1 && xdg-open http://127.0.0.1:8080 && cd "$USB_ROOT/Servers-linux/caddy-server" && ./caddy_linux_amd64 run --config "$USB_ROOT/SharedSettings/Caddyfile"'
-Icon=network-wired
-Terminal=true
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:f334695dd3a9cdb06faaab0d23ca8b6ce2e922e6e9330241491d009a0e57fa2d
+size 472

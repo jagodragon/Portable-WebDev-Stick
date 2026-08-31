@@ -1,5 +1,3 @@
-#!/bin/sh
-
-(echo '// see prettify.js for copyright, license and expanded version'; python -mrjsmin <prettify.js) >prettify.min.js
-
-# needs python and rjsmin installed
+version https://git-lfs.github.com/spec/v1
+oid sha256:e20a3a398decc16aabe2284f2f8cdbe5db3c87899df5b92836680d24939ba83e
+size 167

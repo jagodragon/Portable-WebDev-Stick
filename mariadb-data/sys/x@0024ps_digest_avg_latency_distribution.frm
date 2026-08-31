@@ -1,17 +1,3 @@
-TYPE=VIEW
-query=select count(0) AS `cnt`,round(`performance_schema`.`events_statements_summary_by_digest`.`AVG_TIMER_WAIT` / 1000000,0) AS `avg_us` from `performance_schema`.`events_statements_summary_by_digest` group by round(`performance_schema`.`events_statements_summary_by_digest`.`AVG_TIMER_WAIT` / 1000000,0)
-md5=90f26794b9a8e64fa4b20b5972595230
-updatable=0
-algorithm=2
-definer_user=mariadb.sys
-definer_host=localhost
-suid=0
-with_check_option=0
-timestamp=0001787869654751891
-create-version=2
-source=SELECT COUNT(*) cnt,\n       ROUND(avg_timer_wait/1000000) AS avg_us\n  FROM performance_schema.events_statements_summary_by_digest\n GROUP BY avg_us;
-client_cs_name=utf8mb3
-connection_cl_name=utf8mb3_general_ci
-view_body_utf8=select count(0) AS `cnt`,round(`performance_schema`.`events_statements_summary_by_digest`.`AVG_TIMER_WAIT` / 1000000,0) AS `avg_us` from `performance_schema`.`events_statements_summary_by_digest` group by round(`performance_schema`.`events_statements_summary_by_digest`.`AVG_TIMER_WAIT` / 1000000,0)
-sql_path=CURRENT_SCHEMA
-mariadb-version=120303
+version https://git-lfs.github.com/spec/v1
+oid sha256:1fa9c5eb1c7d741e09430d79d3df31f9b56a9e9c1b1b24b99a1cdac1fedee6bb
+size 1080

@@ -1,12 +1,3 @@
-// WebDev/www/node-app.js
-const http = require('http');
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('🟩 Success! Modern Node.js v24.20.0 LTS Backend Server is Alive and Functional!\n');
-});
-
-// Bind natively to your internal loopback port
-server.listen(3000, '127.0.0.1', () => {
-    console.log('Node.js app running silently over port 3000...');
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:11e0f0cb27f7a9b98dbf431ffe70d51e47ba66908b7349b131dad719f83fe8ad
+size 429

@@ -1,18 +1,3 @@
-#! /bin/sh
-#
-# Created by configure
-
-CC="musl-gcc -static"; export CC
-LDFLAGS="-static --static"; export LDFLAGS
-"./configure" \
-"--prefix=/run/media/jago_dragon/WebDev/Servers-linux/apache-server" \
-"--with-included-apr" \
-"--with-expat=/run/media/jago_dragon/WebDev/ApacheDownloads/expat-static" \
-"--with-pcre=/run/media/jago_dragon/WebDev/ApacheDownloads/pcre2-static/bin/pcre2-config" \
-"--enable-mods-static=all" \
-"--disable-so" \
-"--disable-xml2" \
-"--without-libxml2" \
-"LDFLAGS=-static --static" \
-"CC=musl-gcc -static" \
-"$@"
+version https://git-lfs.github.com/spec/v1
+oid sha256:10a205f6c0c7e9e5f398cf32e8848011fd47faa2330a86eda95d87b259ff9cef
+size 537

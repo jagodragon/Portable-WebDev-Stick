@@ -1,7 +1,3 @@
-[Desktop Entry]
-Type=Application
-Name=Start Live Production Web Server (Apache)
-Comment=Launches your newly compiled portable Apache server and keeps terminal open
-Exec=bash -c 'cd "$(dirname "%k")/Servers-linux/apache-server" && ./StartWeb.sh'
-Icon=network-server
-Terminal=true
+version https://git-lfs.github.com/spec/v1
+oid sha256:a80b6424e432556cafbeb2d662b4c6121bfaf6afc3ee389939eba3b50b2b3411
+size 279
