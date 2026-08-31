@@ -1,0 +1,11 @@
+prefix=/run/media/jago_dragon/WebDev/Servers-linux/apache-server
+exec_prefix=/run/media/jago_dragon/WebDev/Servers-linux/apache-server
+libdir=${prefix}/lib
+APR_MAJOR_VERSION=1
+includedir=/run/media/jago_dragon/WebDev/Servers-linux/apache-server/include
+
+Name: APR
+Description: The Apache Portable Runtime library
+Version: 1.7.6
+Libs: -L${libdir} -lapr-${APR_MAJOR_VERSION} -lpthread
+Cflags: -DLINUX -D_REENTRANT -D_GNU_SOURCE -g -O2 -I${includedir}
