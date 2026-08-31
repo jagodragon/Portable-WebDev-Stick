@@ -1,0 +1,70 @@
+libxml2_la-parser.lo: parser.c libxml.h config.h \
+ include/libxml/xmlversion.h include/libxml/xmlexports.h \
+ /usr/include/x86_64-linux-musl/stdlib.h \
+ /usr/include/x86_64-linux-musl/features.h \
+ /usr/include/x86_64-linux-musl/bits/alltypes.h \
+ /usr/include/x86_64-linux-musl/alloca.h \
+ /usr/include/x86_64-linux-musl/limits.h \
+ /usr/include/x86_64-linux-musl/bits/limits.h \
+ /usr/include/x86_64-linux-musl/string.h \
+ /usr/include/x86_64-linux-musl/strings.h \
+ /usr/include/x86_64-linux-musl/stdarg.h \
+ /usr/include/x86_64-linux-musl/stddef.h \
+ /usr/include/x86_64-linux-musl/ctype.h include/libxml/parser.h \
+ include/libxml/tree.h /usr/include/x86_64-linux-musl/stdio.h \
+ include/libxml/xmlstring.h include/libxml/xmlmemory.h \
+ include/libxml/xmlregexp.h include/libxml/dict.h include/libxml/hash.h \
+ include/libxml/valid.h include/libxml/xmlerror.h include/libxml/list.h \
+ include/libxml/xmlautomata.h include/libxml/entities.h \
+ include/libxml/encoding.h /usr/include/x86_64-linux-musl/iconv.h \
+ include/libxml/xmlIO.h include/libxml/SAX2.h include/libxml/threads.h \
+ include/libxml/parserInternals.h include/libxml/HTMLparser.h \
+ include/libxml/chvalid.h include/libxml/uri.h include/libxml/catalog.h \
+ include/private/buf.h include/private/dict.h include/private/entities.h \
+ include/private/error.h include/private/html.h include/private/io.h \
+ include/private/parser.h
+libxml.h:
+config.h:
+include/libxml/xmlversion.h:
+include/libxml/xmlexports.h:
+/usr/include/x86_64-linux-musl/stdlib.h:
+/usr/include/x86_64-linux-musl/features.h:
+/usr/include/x86_64-linux-musl/bits/alltypes.h:
+/usr/include/x86_64-linux-musl/alloca.h:
+/usr/include/x86_64-linux-musl/limits.h:
+/usr/include/x86_64-linux-musl/bits/limits.h:
+/usr/include/x86_64-linux-musl/string.h:
+/usr/include/x86_64-linux-musl/strings.h:
+/usr/include/x86_64-linux-musl/stdarg.h:
+/usr/include/x86_64-linux-musl/stddef.h:
+/usr/include/x86_64-linux-musl/ctype.h:
+include/libxml/parser.h:
+include/libxml/tree.h:
+/usr/include/x86_64-linux-musl/stdio.h:
+include/libxml/xmlstring.h:
+include/libxml/xmlmemory.h:
+include/libxml/xmlregexp.h:
+include/libxml/dict.h:
+include/libxml/hash.h:
+include/libxml/valid.h:
+include/libxml/xmlerror.h:
+include/libxml/list.h:
+include/libxml/xmlautomata.h:
+include/libxml/entities.h:
+include/libxml/encoding.h:
+/usr/include/x86_64-linux-musl/iconv.h:
+include/libxml/xmlIO.h:
+include/libxml/SAX2.h:
+include/libxml/threads.h:
+include/libxml/parserInternals.h:
+include/libxml/HTMLparser.h:
+include/libxml/chvalid.h:
+include/libxml/uri.h:
+include/libxml/catalog.h:
+include/private/buf.h:
+include/private/dict.h:
+include/private/entities.h:
+include/private/error.h:
+include/private/html.h:
+include/private/io.h:
+include/private/parser.h:

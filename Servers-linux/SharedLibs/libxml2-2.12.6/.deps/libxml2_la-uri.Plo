@@ -1,0 +1,27 @@
+libxml2_la-uri.lo: uri.c libxml.h config.h include/libxml/xmlversion.h \
+ include/libxml/xmlexports.h /usr/include/x86_64-linux-musl/limits.h \
+ /usr/include/x86_64-linux-musl/features.h \
+ /usr/include/x86_64-linux-musl/bits/alltypes.h \
+ /usr/include/x86_64-linux-musl/bits/limits.h \
+ /usr/include/x86_64-linux-musl/string.h \
+ /usr/include/x86_64-linux-musl/strings.h include/libxml/xmlmemory.h \
+ /usr/include/x86_64-linux-musl/stdio.h include/libxml/uri.h \
+ include/libxml/xmlstring.h /usr/include/x86_64-linux-musl/stdarg.h \
+ include/libxml/xmlerror.h include/private/error.h
+libxml.h:
+config.h:
+include/libxml/xmlversion.h:
+include/libxml/xmlexports.h:
+/usr/include/x86_64-linux-musl/limits.h:
+/usr/include/x86_64-linux-musl/features.h:
+/usr/include/x86_64-linux-musl/bits/alltypes.h:
+/usr/include/x86_64-linux-musl/bits/limits.h:
+/usr/include/x86_64-linux-musl/string.h:
+/usr/include/x86_64-linux-musl/strings.h:
+include/libxml/xmlmemory.h:
+/usr/include/x86_64-linux-musl/stdio.h:
+include/libxml/uri.h:
+include/libxml/xmlstring.h:
+/usr/include/x86_64-linux-musl/stdarg.h:
+include/libxml/xmlerror.h:
+include/private/error.h:

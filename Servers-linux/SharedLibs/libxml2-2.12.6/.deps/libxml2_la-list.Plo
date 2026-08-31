@@ -1,0 +1,23 @@
+libxml2_la-list.lo: list.c libxml.h config.h include/libxml/xmlversion.h \
+ include/libxml/xmlexports.h /usr/include/x86_64-linux-musl/stdlib.h \
+ /usr/include/x86_64-linux-musl/features.h \
+ /usr/include/x86_64-linux-musl/bits/alltypes.h \
+ /usr/include/x86_64-linux-musl/alloca.h \
+ /usr/include/x86_64-linux-musl/string.h \
+ /usr/include/x86_64-linux-musl/strings.h include/libxml/xmlmemory.h \
+ /usr/include/x86_64-linux-musl/stdio.h include/libxml/xmlerror.h \
+ include/libxml/list.h
+libxml.h:
+config.h:
+include/libxml/xmlversion.h:
+include/libxml/xmlexports.h:
+/usr/include/x86_64-linux-musl/stdlib.h:
+/usr/include/x86_64-linux-musl/features.h:
+/usr/include/x86_64-linux-musl/bits/alltypes.h:
+/usr/include/x86_64-linux-musl/alloca.h:
+/usr/include/x86_64-linux-musl/string.h:
+/usr/include/x86_64-linux-musl/strings.h:
+include/libxml/xmlmemory.h:
+/usr/include/x86_64-linux-musl/stdio.h:
+include/libxml/xmlerror.h:
+include/libxml/list.h:
