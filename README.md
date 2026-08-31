@@ -1,63 +1,243 @@
 # 🚀 Portable Multi-Platform WebDev Sandbox Station
 
-A 100% self-contained, zero-dependency local development workspace designed to run entirely off a portable USB drive. This repository bundles a relational MariaDB database engine and a high-performance multi-threaded Caddy web proxy server layer supporting isolated PHP script rendering across both **Linux (x86_64)** and **Windows (x64)** environments without altering local host system packages.
+A self-contained, portable full-stack web development environment that runs directly from a USB drive on both Windows and Linux without requiring installation, administrator privileges, or modifications to the host operating system.
 
-## 🗂️ Workspace Architecture Blueprint
+Develop on Windows. Unplug the drive. Plug it into Linux. Continue exactly where you left off using the same databases, project files, and configuration.
 
-```text
+---
+
+# ✨ Features
+
+## Cross-Platform Development
+
+- Windows x64 support
+- Linux x86_64 support
+- Shared project files
+- Shared database storage
+- Shared configuration files
+
+## Web Servers
+
+- Apache HTTP Server
+- Caddy Web Server (Backup/Fallback Server)
+
+## Backend Development
+
+- PHP
+- Node.js
+- Python
+
+## Databases
+
+- MariaDB
+- Redis
+
+## Development Tools
+
+- DBeaver Portable
+
+## Portable Design
+
+- No installation required
+- No system package modifications
+- Runs entirely from removable storage
+- Shared data and project workspace between operating systems
+
+---
+
+# 📁 Project Structure
+
 WebDev/
-├── mariadb-data/                     # Shared database storage layers (InnoDB)
-├── Servers-linux/                    # Isolated Linux binary modules
-│   ├── caddy-server/                 # Standalone Linux Caddy Engine
-│   ├── mariadb-12.3.3-linux/         # Standalone Linux MariaDB Engine
-│   └── php-desktop/                  # Statically-linked Linux PHP CLI Binary
-├── Servers-Win/                      # Isolated Windows engine modules (.exe/.dll)
-│   ├── caddy-server/                 # Standalone Windows Caddy Engine
-│   ├── mariadb-12.3.3-win/           # Standalone Windows MariaDB Engine
-│   └── php-desktop/                  # Portable Windows PHP TS Binaries
-├── SharedSettings/                   # Unified cross-platform config mapping
-│   └── Caddyfile                     # Network parsing proxy routing rules
-├── www/                              # Shared codebase repository (HTML/PHP)
-│   ├── config.php                    # Global database connection adapter
-│   └── index.php                     # Default workspace dashboard homepage
-└── *.desktop / *.bat                 # One-click automation shortcut handlers
-```
+├── mariadb-data/              # Shared MariaDB data storage
+├── SharedLibs/                # Shared libraries used by multiple services
+├── SharedSettings/            # Shared cross-platform configuration files
+├── www/                       # Application source code
 
-## 🐧 Linux Operation Dashboard (PikaOS, Ubuntu, Arch, etc.)
+├── Servers-linux/
+│   ├── apache-server/
+│   ├── caddy-server/
+│   ├── mariadb/
+│   ├── node-desktop/
+│   ├── php-desktop/
+│   ├── python/
+│   └── redis-server/
 
-Execution commands run directly within standard user-space and require **zero** root (`sudo`) permissions:
+├── Servers-Win/
+│   ├── apache-server/
+│   ├── caddy-server/
+│   ├── mariadb/
+│   ├── node-desktop/
+│   ├── php-desktop/
+│   └── redis-server/
 
-*   **Start Database Server:** Double-click `linux.StartDB.desktop` to initialize your local MariaDB instance over network port `3306`.
-*   **Start Production Web Server:** Double-click `linux.StartProductionServer.desktop`. This boots your background FastCGI process, starts Caddy, and automatically slides your default browser open to `http://127.0.0.1:8080`.
-*   ***(IF Production Web Server Fails to load)Start Backup Web Server:*** Double-click `linux.StartBackupServer-Caddy.bat`
-*   **Stop Production Server:** Double-click `linux.StopProductionServer.desktop` to sweep background port listeners and drop threads instantly. (This should also stop the backup web server)
-*   **Stop Database Server:** Double-click `linux.StopDB.desktop` to safely park your tables and commit transactional data structures to disk layout segments.
+├── software-linux/
+│   └── dbeaver-portable/
 
-## 🪟 Windows Operation Dashboard (x64 Architectures)
+└── Software-win/
+    └── dbeaver-portable/
 
-Automated tracking batch wrappers handle standard Windows shell loop configurations:
+---
 
-*   **Start Database Server:** Double-click `win.StartDB.bat`.
-*   **Start Production Web Server:** Double-click `win.StartProductionServer.bat`.
-*   ***(IF Production Web Server Fails to load)Start Backup Web Server:*** Double-click `win.StartBackupServer-Caddy.bat`
-*   **Stop Production Server:** Double-click `win.StopProductionServer.bat`.
-*   **Stop Database Server:** Double-click `win.StopDB.bat`. (This should also stop the backup web server)
+# 🔧 Shared Configuration Files
 
-## 🛠️ Global Application Database Connection Adapter (`www/config.php`)
+The SharedSettings folder contains configuration files used by both Windows and Linux environments.
 
-To connect any project script files directly to your live portable data layer seamlessly across both operating systems, use this clean, pre-configured PDO adapter module array format:
+SharedSettings/
+├── Caddyfile
+├── httpd.conf
+├── httpd-ssl.conf
+├── httpd-vhosts.conf
+├── mariadb-configs.cnf
+├── node-app.js
+├── php.ini
+├── php-fpm.conf
+├── python-env.sh
+└── redis.conf
 
-```php
+---
+
+# ⚡ Quick Start (Windows)
+
+## Start MariaDB
+
+Run:
+
+win.StartDB.bat
+
+## Start Development Web Server
+
+Run:
+
+win.StartProductionServer.bat
+
+Then browse to:
+
+http://127.0.0.1:8080
+
+## If Apache Fails
+
+Run:
+
+win.StartBackupServer-Caddy.bat
+
+## Stop Services
+
+Run:
+
+win.StopProductionServer.bat
+
+Run:
+
+win.StopDB.bat
+
+---
+
+# ⚡ Quick Start (Linux)
+
+## Start MariaDB
+
+Run:
+
+linux.StartDB.desktop
+
+## Start Development Web Server
+
+Run:
+
+linux.StartProductionServer.desktop
+
+Then browse to:
+
+http://127.0.0.1:8080
+
+## If Apache Fails
+
+Run:
+
+linux.StartBackupServer-Caddy.desktop
+
+## Stop Services
+
+Run:
+
+linux.StopProductionServer.desktop
+
+Run:
+
+linux.StopDB.desktop
+
+---
+
+# 🔄 Cross Platform Workflow
+
+1. Connect the USB drive to a Windows computer.
+2. Start MariaDB.
+3. Start the production web server.
+4. Develop normally.
+5. Shut down services.
+6. Eject the USB drive.
+7. Plug the USB drive into a Linux computer.
+8. Start services.
+9. Continue developing using the same files, databases, and configuration.
+
+No export/import process is required.
+
+---
+
+# 🗄️ Database Access Example
+
+config.php
+
 <?php
-\$host    = '127.0.0.1';
-\(db      = 'your_database_name'; // Change to your project target database\)user    = 'root';               # Unified blank password user profile
-\$pass    = '';
-\(port    = '3306';\)charset = 'utf8mb4';
 
-\$dsn = "mysql:host=host;dbname=db;port=port;charset=charset";
-pdo = new PDO(dsn, user, pass, [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-]);
-```
+$host    = '127.0.0.1';
+$db      = 'your_database_name';
+$user    = 'webdev';
+$pass    = '';
+$port    = 3306;
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;port=$port;charset=$charset";
+
+$pdo = new PDO(
+    $dsn,
+    $user,
+    $pass,
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false
+    ]
+);
+
+---
+
+# 🎯 Project Goals
+
+- Portable
+- Cross-platform
+- Self-contained
+- Full-stack capable
+- USB-friendly
+- No host system modifications
+- Easy to back up
+- Easy to move between machines
+
+---
+
+# 📋 Current Status
+
+Active development.
+
+The stack currently includes:
+
+✅ Apache  
+✅ Caddy  
+✅ MariaDB  
+✅ Redis  
+✅ PHP  
+✅ Node.js  
+✅ Python  
+✅ DBeaver Portable  
+✅ Windows Support  
+✅ Linux Support
