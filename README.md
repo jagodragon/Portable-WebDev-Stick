@@ -44,44 +44,39 @@ Develop on Windows. Unplug the drive. Plug it into Linux. Continue exactly where
 - Shared data and project workspace between operating systems
 
 ---
-
 # 📁 Project Structure
-
-WebDev/
-├── mariadb-data/              # Shared MariaDB data storage
-├── SharedLibs/                # Shared libraries used by multiple services
-├── SharedSettings/            # Shared cross-platform configuration files
-├── www/                       # Application source code
-
-├── Servers-linux/
-│   ├── apache-server/
-│   ├── caddy-server/
-│   ├── mariadb/
-│   ├── node-desktop/
-│   ├── php-desktop/
-│   ├── python/
-│   └── redis-server/
-
-├── Servers-Win/
-│   ├── apache-server/
-│   ├── caddy-server/
-│   ├── mariadb/
-│   ├── node-desktop/
-│   ├── php-desktop/
-│   └── redis-server/
-
-├── software-linux/
-│   └── dbeaver-portable/
-
-└── Software-win/
-    └── dbeaver-portable/
-
+```text
+WebDev
+├── mariadb-data              # Shared MariaDB data storage
+├── SharedLibs                # Shared libraries used by multiple services
+├── SharedSettings            # Shared cross-platform configuration files
+├── www                       # Application source code
+├── Servers-linux
+│   ├── apache-server
+│   ├── caddy-server
+│   ├── mariadb
+│   ├── node-desktop
+│   ├── php-desktop
+│   ├── python
+│   └── redis-server
+├── Servers-Win
+│   ├── apache-server
+│   ├── caddy-server
+│   ├── mariadb
+│   ├── node-desktop
+│   ├── php-desktop
+│   └── redis-server
+├── software-linux
+│   └── dbeaver-portable
+└── Software-win
+    └── dbeaver-portable
+```
 ---
 
 # 🔧 Shared Configuration Files
-
 The SharedSettings folder contains configuration files used by both Windows and Linux environments.
-
+---
+```text
 SharedSettings/
 ├── Caddyfile
 ├── httpd.conf
@@ -93,7 +88,7 @@ SharedSettings/
 ├── php-fpm.conf
 ├── python-env.sh
 └── redis.conf
-
+```
 ---
 
 # ⚡ Quick Start (Windows)
@@ -111,9 +106,9 @@ Run:
 win.StartProductionServer.bat
 
 Then browse to:
-
+```text
 http://127.0.0.1:8080
-
+```
 ## If Apache Fails
 
 Run:
@@ -147,9 +142,9 @@ Run:
 linux.StartProductionServer.desktop
 
 Then browse to:
-
+```text
 http://127.0.0.1:8080
-
+```
 ## If Apache Fails
 
 Run:
@@ -185,7 +180,7 @@ No export/import process is required.
 ---
 
 # 🗄️ Database Access Example
-
+```text
 config.php
 
 <?php
@@ -209,7 +204,7 @@ $pdo = new PDO(
         PDO::ATTR_EMULATE_PREPARES => false
     ]
 );
-
+```
 ---
 
 # 🎯 Project Goals
