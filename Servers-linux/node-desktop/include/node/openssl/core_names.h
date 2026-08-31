@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:68328cd4bebe630e8f909a00461995c81a9945cb57aba117556145451f6e845e
-size 106
+#if defined(OPENSSL_NO_ASM)
+# include "./core_names_no-asm.h"
+#else
+# include "./core_names_asm.h"
+#endif

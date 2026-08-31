@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3fa5079eec2ca45d95a7a1ed58b89fc0077255f6665d268fed21502336048435
-size 98
+#if defined(OPENSSL_NO_ASM)
+# include "./pkcs12_no-asm.h"
+#else
+# include "./pkcs12_asm.h"
+#endif
