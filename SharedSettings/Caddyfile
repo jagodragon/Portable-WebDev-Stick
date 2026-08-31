@@ -1,0 +1,24 @@
+{
+    # 1. Turn off the local admin API port lookup loop to lock down process control sockets
+    admin off
+
+    # 2. Global performance buffering optimizations
+    text_mode_logs
+}
+
+# Your Unified Local Production Site Workspace Root Address Matrix
+http://127.0.0.1:8080 {
+
+    # Anchor the web root cleanly relative to your shared website codebase folder
+    root * "../../www"
+
+    # Route all incoming .php scripts directly to your portable FastCGI process manager gateway
+    # This automatically handles script filename translation variables cleanly across operating systems!
+    php_fastcgi 127.0.0.1:9000
+
+    # Enable native static asset file handling file server loops for HTML, JS, and CSS fallbacks
+    file_server
+
+    # Enable clean global directory index path lookups
+    try_files {path} {path}/ index.php index.html
+}

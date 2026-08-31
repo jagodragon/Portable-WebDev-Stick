@@ -1,0 +1,23 @@
+# ====================================================================
+# 🚀 SharedSettings/mariadb-configs.cnf - Cross-Platform Data Sheet
+# ====================================================================
+[mysqld]
+# Basic Portable Engine Security Matrix
+port = 3306
+bind-address = 127.0.0.1
+skip-networking = 0
+
+# Unix tracking socket file fallback location (Crucial for Linux loops)
+# Windows reads the default relative fallback; Linux overrides it via script
+socket = mariadb.sock
+
+# Point directly to your portable data folder
+datadir = ../../mariadb-data
+
+# Disable user permissions tables for instant out-of-the-box local dev access
+skip-grant-tables
+
+# InnoDB Hardware Tuning parameters for USB Sector Protection
+innodb_buffer_pool_size = 16M
+innodb_log_file_size = 5M
+innodb_flush_log_at_trx_commit = 2
