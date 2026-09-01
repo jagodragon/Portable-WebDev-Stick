@@ -1,0 +1,5 @@
+#!/home/jago_dragon/Portable-Python/install/bin/python3.14
+
+import pydoc
+if __name__ == '__main__':
+    pydoc.cli()
