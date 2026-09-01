@@ -65,6 +65,7 @@ WebDev
 │   ├── mariadb
 │   ├── node-desktop
 │   ├── php-desktop
+│   ├── python
 │   └── redis-server
 ├── software-linux
 │   └── dbeaver-portable
