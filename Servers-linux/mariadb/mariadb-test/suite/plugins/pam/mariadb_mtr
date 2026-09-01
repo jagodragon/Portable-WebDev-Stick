@@ -1,0 +1,4 @@
+# Put it in /etc/pam.d/mariadb_mtr
+
+auth            required        /usr/local/mysql/lib/plugin/test_pam_modules/pam_mariadb_mtr.so pam_test
+account         required        pam_permit.so

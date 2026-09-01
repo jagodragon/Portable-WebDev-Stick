@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:647e6d6f27e11a7e4cf1a128aed1178e0113510d83df58dbe17b38c1c2530a6d
-size 246
+[Desktop Entry]
+Type=Application
+Name=Stop Portable MariaDB
+Comment=Shuts down the portable server from its new nested location
+Exec=bash -c 'cd "$(dirname "%k")/Servers-linux/mariadb" && ./StopDB.sh'
+Icon=process-stop
+Terminal=true
