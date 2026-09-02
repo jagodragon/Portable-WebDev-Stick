@@ -43,6 +43,26 @@ Develop on Windows. Unplug the drive. Plug it into Linux. Continue exactly where
 - Runs entirely from removable storage
 - Shared data and project workspace between operating systems
 
+## Supported Filesystem
+```text
+✓ ExFAT (Recommended) - Stable and reliable for Linux and Windows
+✓ NTFS (Not Recommended) - Unreliable on Linux but might work depending on your Distro.
+```
+
+## Unsupported Filesystems
+these file system really only work for one file system
+```text
+✗ FAT32 - Windows Only
+  -Does not preserve Linux file permisions or symbolic links.
+  -The Linux servers in this package will not work with this format.
+✗ VFAT  - Windows Only
+  -Does not preserve Linux file permisions or symbolic links.
+  -The Linux servers in this package will not work with this format.
+✗ ext4  - Linux Only Filesystem
+✗ Btrfs - Linux Only Filesystem
+✗ UDF   - May work but really not suitable for this project
+```
+
 ---
 # 📁 Project Structure
 ```text

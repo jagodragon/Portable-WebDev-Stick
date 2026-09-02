@@ -34,6 +34,7 @@ echo "⚡ Booting Silent Portable PHP FastCGI Gateway on Port 9000..."
 CONF_DIR="$(cd ../../SharedSettings && pwd)"
 
 ../php-desktop/php-bin \
+    -p "$USB_ROOT/Servers-linux/php-desktop" \
     -c "$CONF_DIR" \
     -d opcache.enable=1 \
     -d opcache.enable_cli=1 \
