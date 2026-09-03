@@ -21,16 +21,16 @@ Develop on Windows. Unplug the drive. Plug it into Linux. Continue exactly where
 - Apache HTTP Server
 - Caddy Web Server (Backup/Fallback Server)
 
-## Backend Development
+## Backend
 
 - PHP
 - Node.js
 - Python
+- Redis
 
 ## Databases
 
 - MariaDB
-- Redis
 
 ## Development Tools
 
@@ -50,7 +50,7 @@ Develop on Windows. Unplug the drive. Plug it into Linux. Continue exactly where
 ```
 
 ## Unsupported Filesystems
-these file system really only work for one file system
+these file system really only work for one operating system
 ```text
 ✗ FAT32 - Windows Only
   -Does not preserve Linux file permisions or symbolic links.
@@ -68,29 +68,33 @@ these file system really only work for one file system
 ```text
 WebDev
 ├── mariadb-data              # Shared MariaDB data storage
-├── SharedLibs                # Shared libraries used by multiple services
+├── OS_Linux                  # Single Directory for all things Linux sepcific
+│   ├── DesktopApps           # Preloaded desktop application(s)
+│   │   └── dbeaver-portable
+│   ├── Scripts               # Single point storage for all linux script
+│   └── Software              # All software required for Linux server to run
+│       ├── apache-server
+│       ├── caddy-server
+│       ├── mariadb
+│       ├── node-desktop
+│       ├── php-desktop
+│       ├── python
+│       └── redis-server
+├── OS_Linux                  # Single Directory for all things Windows sepcific
+│   ├── DesktopApps           # Preloaded desktop application(s)
+│   │   └── dbeaver-portable
+│   ├── Scripts               # Single point storage for all Windows script
+│   └── Software              # All software required for Windows server to run
+│       ├── apache-server
+│       ├── caddy-server
+│       ├── mariadb
+│       ├── node-desktop
+│       ├── php-desktop
+│       ├── python
+│       └── redis-server
 ├── SharedSettings            # Shared cross-platform configuration files
-├── www                       # Application source code
-├── Servers-linux
-│   ├── apache-server
-│   ├── caddy-server
-│   ├── mariadb
-│   ├── node-desktop
-│   ├── php-desktop
-│   ├── python
-│   └── redis-server
-├── Servers-Win
-│   ├── apache-server
-│   ├── caddy-server
-│   ├── mariadb
-│   ├── node-desktop
-│   ├── php-desktop
-│   ├── python
-│   └── redis-server
-├── software-linux
-│   └── dbeaver-portable
-└── Software-win
-    └── dbeaver-portable
+└── www                       # WebHost files
+
 ```
 ---
 
@@ -101,8 +105,8 @@ The SharedSettings folder contains configuration files used by both Windows and 
 SharedSettings/
 ├── Caddyfile
 ├── httpd.conf
-├── httpd-ssl.conf
-├── httpd-vhosts.conf
+├── httpd-ssl.conf (not configured yet)
+├── httpd-vhosts.conf (not configured yet)
 ├── mariadb-configs.cnf
 ├── node-app.js
 ├── php.ini
@@ -118,33 +122,32 @@ SharedSettings/
 
 Run:
 
-win.StartDB.bat
+win.StartMariaDB.bat
 
 ## Start Development Web Server
 
 Run:
 
-win.StartProductionServer.bat
+win.StartPrimaryWebServer_Apache.bat
+or
+win.StartSecondaryWebServer_Caddy.bat
 
 Then browse to:
 ```text
 http://127.0.0.1:8080
 ```
-## If Apache Fails
-
-Run:
-
-win.StartBackupServer-Caddy.bat
 
 ## Stop Services
 
 Run:
 
-win.StopProductionServer.bat
+win.StopPrimaryWebServer_Apache.bat
+or
+win.StopSecondaryWebServer_Caddy.bat
 
 Run:
 
-win.StopDB.bat
+win.StopMariaDB.bat
 
 ---
 
@@ -154,33 +157,32 @@ win.StopDB.bat
 
 Run:
 
-linux.StartDB.desktop
+linux.StartMariaDB.desktop
 
 ## Start Development Web Server
 
 Run:
 
-linux.StartProductionServer.desktop
+Linux.StartPrimaryWebServer_Apache.desktop
+or
+Linux.StartSecondaryWebServer_Caddy.desktop
 
 Then browse to:
 ```text
 http://127.0.0.1:8080
 ```
-## If Apache Fails
-
-Run:
-
-linux.StartBackupServer-Caddy.desktop
 
 ## Stop Services
 
 Run:
 
-linux.StopProductionServer.desktop
+Linux.StopPrimaryWebServer_Apache.desktop
+or
+Linux.StopSecondaryWebServer_Caddy.desktop
 
 Run:
 
-linux.StopDB.desktop
+Linux.StopMariaDB.desktop
 
 ---
 
@@ -188,7 +190,7 @@ linux.StopDB.desktop
 
 1. Connect the USB drive to a Windows computer.
 2. Start MariaDB.
-3. Start the production web server.
+3. Start the prefered web server.
 4. Develop normally.
 5. Shut down services.
 6. Eject the USB drive.

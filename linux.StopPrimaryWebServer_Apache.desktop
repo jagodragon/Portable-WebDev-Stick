@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Stop Production Web Server
+Comment=Safely terminates your portable Apache and background PHP processes
+Exec=bash -c 'cd "$(dirname "%k")/OS_linux/Scripts" && ./StopApache.sh'
+Icon=process-stop
+Terminal=true

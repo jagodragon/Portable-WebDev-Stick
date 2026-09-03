@@ -1,0 +1,46 @@
+#
+# MDEV-37366: Inconsistency detected - create sequence
+# Failed 'SELECT NEXT VALUE' on applier node.
+#
+--source include/galera_cluster.inc
+--source include/have_log_bin.inc
+--source include/have_perfschema.inc
+
+--connection node_1
+#
+# Create a sequence table on node1.
+#
+SET SESSION auto_increment_increment=2;
+SET SESSION auto_increment_offset=1;
+SET SESSION binlog_row_image=minimal;
+
+SELECT VARIABLE_NAME, SESSION_VALUE, GLOBAL_VALUE FROM
+ INFORMATION_SCHEMA.SYSTEM_VARIABLES WHERE VARIABLE_NAME IN
+ ('auto_increment_increment','auto_increment_offset','binlog_row_image')
+ ORDER BY VARIABLE_NAME;
+
+CREATE SEQUENCE `seq_test` start with 1 minvalue 1 maxvalue 9223372036854775806 increment by 0 cache 1000 nocycle ENGINE=InnoDB;
+SHOW CREATE TABLE seq_test;
+
+#
+# Execute 'SELECT NEXT VALUE' which should not fail on applier node.
+#
+--disable_ps_protocol
+SELECT NEXT VALUE FOR seq_test;
+SELECT NEXT VALUE FOR seq_test;
+--enable_ps_protocol
+#
+# Cleanup
+#
+--connection node_2
+#
+# Verify that node_2 has remained on cluster
+#
+--let $wait_condition = SELECT VARIABLE_VALUE = 2 FROM INFORMATION_SCHEMA.GLOBAL_STATUS WHERE VARIABLE_NAME = 'wsrep_cluster_size'
+--source include/wait_condition.inc
+SELECT VARIABLE_VALUE AS expect_2 FROM INFORMATION_SCHEMA.GLOBAL_STATUS WHERE VARIABLE_NAME = 'wsrep_cluster_size';
+SELECT VARIABLE_VALUE expect_Primary FROM performance_schema.global_status WHERE VARIABLE_NAME = 'wsrep_cluster_status';
+
+DROP SEQUENCE seq_test;
+
+--source include/galera_end.inc

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Stop Portable MariaDB
+Comment=Shuts down the portable server from its new nested location
+Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/Scripts" && ./StopMariaDB.sh'
+Icon=process-stop
+Terminal=true

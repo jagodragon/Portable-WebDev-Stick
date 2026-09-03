@@ -1,0 +1,234 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="ko"><head><META http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<!--
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+              This file is generated from xml source: DO NOT EDIT
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      -->
+<title>사용자정의 오류 응답 - Apache HTTP Server Version 2.4</title>
+<link href="./style/css/manual.css" rel="stylesheet" media="all" type="text/css" title="Main stylesheet">
+<link href="./style/css/manual-loose-100pc.css" rel="alternate stylesheet" media="all" type="text/css" title="No Sidebar - Default font size">
+<link href="./style/css/manual-print.css" rel="stylesheet" media="print" type="text/css"><link rel="stylesheet" type="text/css" href="./style/css/prettify.css">
+<script src="./style/scripts/prettify.min.js">
+</script>
+
+<link href="./images/favicon.png" rel="shortcut icon"></head>
+<body id="manual-page"><div id="page-header">
+<p class="menu"><a href="./mod/">모듈</a> | <a href="./mod/quickreference.html">지시어들</a> | <a href="https://cwiki.apache.org/confluence/display/httpd/FAQ">FAQ</a> | <a href="./glossary.html">용어</a> | <a href="./sitemap.html">사이트맵</a> | <a href="https://bz.apache.org/bugzilla/enter_bug.cgi?product=Apache%20httpd-2">Report a bug</a></p>
+<p class="apache">Apache HTTP Server Version 2.4</p>
+<img alt="" src="./images/feather.png"></div>
+<div class="up"><a href="./"><img title="<-" alt="<-" src="./images/left.gif"></a></div>
+<div id="path">
+<a href="https://www.apache.org/">Apache</a> &gt; <a href="https://httpd.apache.org/">HTTP Server</a> &gt; <a href="https://httpd.apache.org/docs/">Documentation</a> &gt; <a href="./">Version 2.4</a></div><div id="page-content"><div id="preamble"><h1>사용자정의 오류 응답</h1>
+<button aria-label="Toggle language list" class="lang-toggle"><svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16"><circle r="10" cy="12" cx="12"/><line y2="12" x2="22" y1="12" x1="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></button>
+<div class="toplang">
+<p><span>가능한 언어: </span><a href="./en/custom-error.html" hreflang="en" rel="alternate" title="English">&nbsp;en&nbsp;</a> |
+<a href="./es/custom-error.html" hreflang="es" rel="alternate" title="Espa&ntilde;ol">&nbsp;es&nbsp;</a> |
+<a href="./fr/custom-error.html" hreflang="fr" rel="alternate" title="Fran&ccedil;ais">&nbsp;fr&nbsp;</a> |
+<a href="./ja/custom-error.html" hreflang="ja" rel="alternate" title="Japanese">&nbsp;ja&nbsp;</a> |
+<a href="./ko/custom-error.html" title="Korean">&nbsp;ko&nbsp;</a> |
+<a href="./tr/custom-error.html" hreflang="tr" rel="alternate" title="T&uuml;rk&ccedil;e">&nbsp;tr&nbsp;</a></p>
+</div>
+<div class="outofdate">이 문서는 최신판 번역이 아닙니다.
+            최근에 변경된 내용은 영어 문서를 참고하세요.</div>
+
+    <p>웹마스터는 오류나 문제가 발생했을때 아파치의 응답을
+    설정할 수 있다.</p>
+
+    <p>서버가 오류나 문제를 발견했을때 보낼 사용자정의 응답을
+    정의할 수 있다.</p>
+
+    <p>스크립트가 죽은 경우 "500 Server Error" 응답 대신 사용자에게
+    더 친근한 문구를 사용하거나 다른 (같은 사이트나 외부 사이트의)
+    URL로 리다이렉션을 할 수 있다.</p>
+  </div>
+<div id="quickview"><ul id="toc"><li><img alt="" src="./images/down.gif"> <a href="#behavior">행동</a></li>
+<li><img alt="" src="./images/down.gif"> <a href="#configuration">설정</a></li>
+<li><img alt="" src="./images/down.gif"> <a href="#custom">사용자정의 오류 응답과 리다이렉션</a></li>
+</ul></div>
+<div class="top"><a href="#page-header"><img alt="top" src="./images/up.gif"></a></div>
+<div class="section">
+<h2 id="behavior">행동 <a title="Permanent link" href="#behavior" class="permalink">&para;</a></h2>
+    
+
+    <h3>이전 행동</h3>
+      
+
+      <p>NCSA httpd 1.3은 사용자에게 무의미하고 지루한 오류문을
+      보냈다. 문제가 발생한 이유를 로그에 남길 수도 없었다.</p>
+    
+
+    <h3>새로운 행동</h3>
+      
+
+      <p>서버는 다음과 같은 일을 할 수 있다:</p>
+
+      <ol>
+        <li>NCSA의 고정된 문구 대신 다른 문구를 보여주거나</li>
+
+        <li>같은 사이트의 URL로 리다이렉션하거나</li>
+
+        <li>외부 사이트의 URL로 리다이렉션한다.</li>
+      </ol>
+
+      <p>다른 사이트의 URL로 리다이렉션하는 것이 유용할 수 있지만,
+      이 경우 문제를 설명하거나 로그하는데 필요한 정보중 일부만
+      전달된다.</p>
+
+      <p>오류에 대한 정보를 전달하기위해 아파치는 CGI식의 새로운
+      환경변수를 정의한다:</p>
+
+      <div class="example"><p><code>
+        REDIRECT_HTTP_ACCEPT=*/*, image/gif, image/x-xbitmap, 
+            image/jpeg<br>
+        REDIRECT_HTTP_USER_AGENT=Mozilla/1.1b2 (X11; I; HP-UX A.09.05 
+            9000/712)<br>
+        REDIRECT_PATH=.:/bin:/usr/local/bin:/etc<br>
+        REDIRECT_QUERY_STRING=<br>
+        REDIRECT_REMOTE_ADDR=121.345.78.123<br>
+        REDIRECT_REMOTE_HOST=ooh.ahhh.com<br>
+        REDIRECT_SERVER_NAME=crash.bang.edu<br>
+        REDIRECT_SERVER_PORT=80<br>
+        REDIRECT_SERVER_SOFTWARE=Apache/0.8.15<br>
+        REDIRECT_URL=/cgi-bin/buggy.pl
+      </code></p></div>
+
+      <p><code>REDIRECT_</code> 접두사에 주목하라.</p>
+
+      <p>최소한 <code>REDIRECT_URL</code>과
+      <code>REDIRECT_QUERY_STRING</code>은 (cgi-script나
+      cgi-include일) 새 URL로 넘겨진다. 다른 변수는 오류가
+      발생하기 이전에 <span class="transnote">(<em>역주;</em> 이름에서 <code>REDIRECT_</code>를
+      뺀 환경변수가)</span> 존재한 경우에만 있다.
+      <code class="directive"><a href="./mod/core.html#errordocument">ErrorDocument</a></code>가
+      <em>외부로</em> (같은 서버라도 <code>http:</code>와
+      같은 스킴(scheme)으로 시작한다면) 리다이렉션한다면
+      이중 어떤 것도 설정되지 <strong>않는다</strong>.</p>
+    
+  </div><div class="top"><a href="#page-header"><img alt="top" src="./images/up.gif"></a></div>
+<div class="section">
+<h2 id="configuration">설정 <a title="Permanent link" href="#configuration" class="permalink">&para;</a></h2>
+    
+
+    <p><code class="directive"><a href="./mod/core.html#allowoverride">AllowOverride</a></code>가
+    적절히 설정되었다면 .htaccess 파일에서
+    <code class="directive"><a href="./mod/core.html#errordocument">ErrorDocument</a></code>를 사용할
+    수 있다.</p>
+
+    <p>다음은 예이다...</p>
+
+    <div class="example"><p><code>
+      ErrorDocument 500 /cgi-bin/crash-recover <br>
+      ErrorDocument 500 "Sorry, our script crashed. Oh dear" <br>
+      ErrorDocument 500 http://xxx/ <br>
+      ErrorDocument 404 /Lame_excuses/not_found.html <br>
+      ErrorDocument 401 /Subscription/how_to_subscribe.html
+    </code></p></div>
+
+    <p>문법은,</p>
+
+    <div class="example"><p><code>
+      ErrorDocument &lt;3-digit-code&gt; &lt;action&gt;
+    </code></p></div>
+
+    <p>가능한 action은,</p>
+
+    <ol>
+      <li>출력할 문구. 따옴표 (")를 문구 앞에 붙인다. 뒤에 나오는
+      따옴표는 출력된다. <em>주의: 앞에 붙은 따옴표 (")는 출력되지
+      않는다.</em></li>
+
+      <li>리다이렉션할 외부 URL.</li>
+
+      <li>리다이렉션할 내부 URL.</li>
+    </ol>
+  </div><div class="top"><a href="#page-header"><img alt="top" src="./images/up.gif"></a></div>
+<div class="section">
+<h2 id="custom">사용자정의 오류 응답과 리다이렉션 <a title="Permanent link" href="#custom" class="permalink">&para;</a></h2>
+    
+
+    <p>URL로 리다이렉션하는 아파치 행동은
+    스크립트/server-include에 환경변수를 더 넘겨주도록 변경되었다.</p>
+
+    <h3>이전 행동</h3>
+      
+
+      <p>리다이렉션되는 스크립트에 표준 CGI 변수들이 넘어간다.
+      어디에서 리다이렉션이 일어났는지 알 수 없다.</p>
+    
+
+    <h3>새로운 행동</h3>
+      
+
+      <p>리다이렉션된 스크립트는 새로운 환경변수들을 사용할
+      수 있다. 모두 앞에 <code>REDIRECT_</code>가 붙어있다.
+      <code>REDIRECT_</code> 환경변수는 원래 CGI 환경변수명
+      앞에 <code>REDIRECT_</code>를 붙여서 만든다. <em>예를
+      들어</em>, <code>HTTP_USER_AGENT</code>는
+      <code>REDIRECT_HTTP_USER_AGENT</code>가 되었다. 이런 변수에
+      추가로 스크립트가 원래 URL을 알도록 아파치는
+      <code>REDIRECT_URL</code>과 <code>REDIRECT_STATUS</code>를
+      정의한다. 원래 URL과 리다이렉션된 URL 모두 접근 로그에
+      기록할 수 있다.</p>
+
+      <p>ErrorDocument가 같은 서버에 있는 CGI 스크립트로
+      리다이렉션한다면, 스크립트는 클라이언트에게 오류 상황을
+      확실히 전달하기위해 출력에 "<code>Status:</code>" 헤더
+      필드를 포함해야 한다. 예를 들어, Perl로 작성한 ErrorDocument
+      스크립트는 다음과 같다:</p>
+
+      <div class="example"><p><code>
+        ... <br>
+        print  "Content-type: text/html\n"; <br>
+        printf "Status: %s Condition Intercepted\n", $ENV{"REDIRECT_STATUS"}; <br>
+        ...
+      </code></p></div>
+
+      <p><code>404&nbsp;Not&nbsp;Found</code>와 같은 특정 오류
+      상황에 대한 스크립트라면, 대신 <span class="transnote">(<em>역주;</em> 고정된)</span>
+      특정 상태코드와 오류문을 사용할 수 있다.</p>
+
+      <p>(클라이언트에게 리다이렉션을 요청하기위해) 응답에
+      <code>Location:</code> 헤더를 포함한다면, 스크립트는
+      <em>반드시</em> (<code>302&nbsp;Found</code> 같은) 적절한
+      <code>Status:</code> 헤더를 출력해야 함을 주의하라. 그렇지않으면
+      <code>Location:</code> 헤더가 아무 소용없게 될 수 있다.</p>
+    
+  </div></div>
+<div class="bottomlang">
+<p><span>가능한 언어: </span><a href="./en/custom-error.html" hreflang="en" rel="alternate" title="English">&nbsp;en&nbsp;</a> |
+<a href="./es/custom-error.html" hreflang="es" rel="alternate" title="Espa&ntilde;ol">&nbsp;es&nbsp;</a> |
+<a href="./fr/custom-error.html" hreflang="fr" rel="alternate" title="Fran&ccedil;ais">&nbsp;fr&nbsp;</a> |
+<a href="./ja/custom-error.html" hreflang="ja" rel="alternate" title="Japanese">&nbsp;ja&nbsp;</a> |
+<a href="./ko/custom-error.html" title="Korean">&nbsp;ko&nbsp;</a> |
+<a href="./tr/custom-error.html" hreflang="tr" rel="alternate" title="T&uuml;rk&ccedil;e">&nbsp;tr&nbsp;</a></p>
+</div><div id="footer">
+<p class="apache">Copyright 2026 The Apache Software Foundation.<br>Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
+<p class="menu"><a href="./mod/">모듈</a> | <a href="./mod/quickreference.html">지시어들</a> | <a href="https://cwiki.apache.org/confluence/display/httpd/FAQ">FAQ</a> | <a href="./glossary.html">용어</a> | <a href="./sitemap.html">사이트맵</a> | <a href="https://bz.apache.org/bugzilla/enter_bug.cgi?product=Apache%20httpd-2">Report a bug</a></p></div><script><!--//--><![CDATA[//><!--
+if (typeof(prettyPrint) !== 'undefined') {
+    prettyPrint();
+}
+var langToggle = document.querySelector('.lang-toggle');
+var topLang = document.querySelector('.toplang');
+if (langToggle && topLang) {
+    langToggle.addEventListener('click', function() { topLang.classList.toggle('open'); });
+}
+var qv = document.getElementById('quickview');
+if (qv) {
+    document.body.appendChild(qv);
+    var qvBtn = document.createElement('button');
+    qvBtn.className = 'qv-toggle';
+    qvBtn.setAttribute('aria-label', 'Toggle page navigation');
+    qvBtn.innerHTML = '&#9776;';
+    document.body.appendChild(qvBtn);
+    qvBtn.addEventListener('click', function() {
+        var isOpen = qv.classList.toggle('open');
+        if (isOpen) {
+            qv.style.top = window.scrollY + 10 + 'px';
+        }
+    });
+    window.addEventListener('scroll', function() { qv.classList.remove('open'); });
+}
+//--><!]]></script>
+</body></html>

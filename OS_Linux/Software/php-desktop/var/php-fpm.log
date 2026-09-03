@@ -1,0 +1,80 @@
+[29-Aug-2026 17:03:44] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:03:44] NOTICE: fpm is running, pid 680721
+[29-Aug-2026 17:03:44] NOTICE: ready to handle connections
+[29-Aug-2026 17:04:21] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:04:21] ERROR: unable to bind listening socket for address '127.0.0.1:9000': Address in use (98)
+[29-Aug-2026 17:04:21] ERROR: FPM initialization failed
+[29-Aug-2026 17:09:04] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:09:04] NOTICE: fpm is running, pid 681573
+[29-Aug-2026 17:09:04] NOTICE: ready to handle connections
+[29-Aug-2026 17:29:13] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:29:13] NOTICE: fpm is running, pid 683446
+[29-Aug-2026 17:29:13] NOTICE: ready to handle connections
+[29-Aug-2026 17:36:14] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:36:14] NOTICE: fpm is running, pid 684444
+[29-Aug-2026 17:36:14] NOTICE: ready to handle connections
+[29-Aug-2026 17:43:07] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:43:07] NOTICE: fpm is running, pid 685268
+[29-Aug-2026 17:43:07] NOTICE: ready to handle connections
+[29-Aug-2026 17:50:30] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:50:30] NOTICE: fpm is running, pid 685876
+[29-Aug-2026 17:50:30] NOTICE: ready to handle connections
+[29-Aug-2026 17:54:58] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 17:54:58] NOTICE: fpm is running, pid 686433
+[29-Aug-2026 17:54:58] NOTICE: ready to handle connections
+[29-Aug-2026 18:00:42] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 18:00:42] NOTICE: fpm is running, pid 686907
+[29-Aug-2026 18:00:42] NOTICE: ready to handle connections
+[29-Aug-2026 18:07:06] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 18:07:06] NOTICE: fpm is running, pid 687610
+[29-Aug-2026 18:07:06] NOTICE: ready to handle connections
+[29-Aug-2026 18:18:30] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 18:18:30] NOTICE: fpm is running, pid 688484
+[29-Aug-2026 18:18:30] NOTICE: ready to handle connections
+[29-Aug-2026 18:51:26] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 18:51:26] NOTICE: fpm is running, pid 690457
+[29-Aug-2026 18:51:26] NOTICE: ready to handle connections
+[29-Aug-2026 19:00:04] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:00:04] NOTICE: fpm is running, pid 691442
+[29-Aug-2026 19:00:04] NOTICE: ready to handle connections
+[29-Aug-2026 19:05:17] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:05:17] NOTICE: fpm is running, pid 692128
+[29-Aug-2026 19:05:17] NOTICE: ready to handle connections
+[29-Aug-2026 19:10:00] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:10:00] NOTICE: fpm is running, pid 692920
+[29-Aug-2026 19:10:00] NOTICE: ready to handle connections
+[29-Aug-2026 19:16:33] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:16:33] NOTICE: fpm is running, pid 694156
+[29-Aug-2026 19:16:33] NOTICE: ready to handle connections
+[29-Aug-2026 19:20:14] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:20:14] NOTICE: fpm is running, pid 694650
+[29-Aug-2026 19:20:14] NOTICE: ready to handle connections
+[29-Aug-2026 19:28:08] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:28:08] NOTICE: fpm is running, pid 695270
+[29-Aug-2026 19:28:08] NOTICE: ready to handle connections
+[29-Aug-2026 19:31:16] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:31:16] NOTICE: fpm is running, pid 695785
+[29-Aug-2026 19:31:16] NOTICE: ready to handle connections
+[29-Aug-2026 19:36:18] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 19:36:18] NOTICE: fpm is running, pid 696437
+[29-Aug-2026 19:36:18] NOTICE: ready to handle connections
+[29-Aug-2026 20:11:45] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 20:11:45] NOTICE: fpm is running, pid 807705
+[29-Aug-2026 20:11:45] NOTICE: ready to handle connections
+[29-Aug-2026 20:14:32] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 20:14:32] NOTICE: fpm is running, pid 808126
+[29-Aug-2026 20:14:32] NOTICE: ready to handle connections
+[29-Aug-2026 20:15:22] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 20:15:22] NOTICE: fpm is running, pid 808322
+[29-Aug-2026 20:15:22] NOTICE: ready to handle connections
+[29-Aug-2026 20:18:08] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 20:18:08] NOTICE: fpm is running, pid 808723
+[29-Aug-2026 20:18:08] NOTICE: ready to handle connections
+[29-Aug-2026 20:22:34] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 20:22:34] NOTICE: fpm is running, pid 809090
+[29-Aug-2026 20:22:34] NOTICE: ready to handle connections
+[29-Aug-2026 20:31:34] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[29-Aug-2026 20:31:34] NOTICE: fpm is running, pid 809964
+[29-Aug-2026 20:31:34] NOTICE: ready to handle connections
+[30-Aug-2026 01:58:21] NOTICE: Terminating ...
+[30-Aug-2026 01:58:21] NOTICE: exiting, bye-bye!

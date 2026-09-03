@@ -1,0 +1,294 @@
+libcurl_la-curl_ntlm_core.lo: curl_ntlm_core.c curl_setup.h curl_config.h \
+ ../include/curl/system.h /usr/include/x86_64-linux-musl/sys/types.h \
+ /usr/include/x86_64-linux-musl/features.h \
+ /usr/include/x86_64-linux-musl/bits/alltypes.h \
+ /usr/include/x86_64-linux-musl/endian.h \
+ /usr/include/x86_64-linux-musl/sys/select.h \
+ /usr/include/x86_64-linux-musl/sys/socket.h \
+ /usr/include/x86_64-linux-musl/bits/socket.h \
+ /usr/include/x86_64-linux-musl/stdio.h \
+ /usr/include/x86_64-linux-musl/assert.h curl_setup_once.h \
+ /usr/include/x86_64-linux-musl/stdlib.h \
+ /usr/include/x86_64-linux-musl/alloca.h \
+ /usr/include/x86_64-linux-musl/string.h \
+ /usr/include/x86_64-linux-musl/strings.h \
+ /usr/include/x86_64-linux-musl/stdarg.h \
+ /usr/include/x86_64-linux-musl/time.h \
+ /usr/include/x86_64-linux-musl/errno.h \
+ /usr/include/x86_64-linux-musl/bits/errno.h \
+ /usr/include/x86_64-linux-musl/sys/stat.h \
+ /usr/include/x86_64-linux-musl/bits/stat.h \
+ /usr/include/x86_64-linux-musl/sys/time.h \
+ /usr/include/x86_64-linux-musl/stdbool.h \
+ /usr/include/x86_64-linux-musl/unistd.h functypes.h curl_ctype.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/opensslconf.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/configuration.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/macros.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/opensslv.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/des.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/e_os2.h \
+ /usr/include/x86_64-linux-musl/inttypes.h \
+ /usr/include/x86_64-linux-musl/stdint.h \
+ /usr/include/x86_64-linux-musl/bits/stdint.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/md5.h \
+ /usr/include/x86_64-linux-musl/stddef.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ssl.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/e_ostime.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/comp.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/crypto.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/safestack.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/stack.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/types.h \
+ /usr/include/x86_64-linux-musl/limits.h \
+ /usr/include/x86_64-linux-musl/bits/limits.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/cryptoerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/symhacks.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/cryptoerr_legacy.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/core.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/comperr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bio.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bioerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/x509.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/buffer.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/buffererr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/evp.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/core_dispatch.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/indicator.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/params.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bn.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bnerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/evperr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/objects.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/obj_mac.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/asn1.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/asn1err.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/objectserr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ec.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ecerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/rsa.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/rsaerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dsa.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dh.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dherr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dsaerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/sha.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/x509err.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/x509_vfy.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/lhash.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pkcs7.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pkcs7err.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/http.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/conf.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/conferr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/conftypes.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pem.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pemerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/hmac.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/async.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/asyncerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ct.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/cterr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/sslerr.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/sslerr_legacy.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/prov_ssl.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ssl2.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ssl3.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/tls1.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dtls1.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/srtp.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/quic.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/rand.h \
+ /run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/randerr.h \
+ urldata.h cookie.h ../include/curl/curl.h ../include/curl/curlver.h \
+ ../include/curl/system.h ../include/curl/easy.h ../include/curl/multi.h \
+ ../include/curl/curl.h ../include/curl/urlapi.h \
+ ../include/curl/options.h ../include/curl/header.h \
+ ../include/curl/websockets.h ../include/curl/mprintf.h \
+ ../include/curl/typecheck-gcc.h psl.h formdata.h \
+ /usr/include/x86_64-linux-musl/netinet/in.h timeval.h timediff.h \
+ http_chunks.h hostip.h hash.h llist.h curl_addrinfo.h \
+ /usr/include/x86_64-linux-musl/netdb.h \
+ /usr/include/x86_64-linux-musl/arpa/inet.h asyn.h \
+ /usr/include/x86_64-linux-musl/setjmp.h \
+ /usr/include/x86_64-linux-musl/bits/setjmp.h splay.h dynbuf.h dynhds.h \
+ mime.h imap.h pingpong.h curl_sasl.h bufref.h pop3.h smtp.h ftp.h file.h \
+ vssh/ssh.h ../lib/curl_setup.h http.h bufq.h ws.h rtsp.h smb.h mqtt.h \
+ ftplistparser.h multihandle.h conncache.h socketpair.h c-hyper.h \
+ cf-socket.h nonblock.h sockaddr.h strcase.h curl_ntlm_core.h curl_md5.h \
+ curl_hmac.h warnless.h curl_endian.h curl_des.h curl_md4.h curl_printf.h \
+ ../include/curl/mprintf.h curl_memory.h memdebug.h
+curl_setup.h:
+curl_config.h:
+../include/curl/system.h:
+/usr/include/x86_64-linux-musl/sys/types.h:
+/usr/include/x86_64-linux-musl/features.h:
+/usr/include/x86_64-linux-musl/bits/alltypes.h:
+/usr/include/x86_64-linux-musl/endian.h:
+/usr/include/x86_64-linux-musl/sys/select.h:
+/usr/include/x86_64-linux-musl/sys/socket.h:
+/usr/include/x86_64-linux-musl/bits/socket.h:
+/usr/include/x86_64-linux-musl/stdio.h:
+/usr/include/x86_64-linux-musl/assert.h:
+curl_setup_once.h:
+/usr/include/x86_64-linux-musl/stdlib.h:
+/usr/include/x86_64-linux-musl/alloca.h:
+/usr/include/x86_64-linux-musl/string.h:
+/usr/include/x86_64-linux-musl/strings.h:
+/usr/include/x86_64-linux-musl/stdarg.h:
+/usr/include/x86_64-linux-musl/time.h:
+/usr/include/x86_64-linux-musl/errno.h:
+/usr/include/x86_64-linux-musl/bits/errno.h:
+/usr/include/x86_64-linux-musl/sys/stat.h:
+/usr/include/x86_64-linux-musl/bits/stat.h:
+/usr/include/x86_64-linux-musl/sys/time.h:
+/usr/include/x86_64-linux-musl/stdbool.h:
+/usr/include/x86_64-linux-musl/unistd.h:
+functypes.h:
+curl_ctype.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/opensslconf.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/configuration.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/macros.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/opensslv.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/des.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/e_os2.h:
+/usr/include/x86_64-linux-musl/inttypes.h:
+/usr/include/x86_64-linux-musl/stdint.h:
+/usr/include/x86_64-linux-musl/bits/stdint.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/md5.h:
+/usr/include/x86_64-linux-musl/stddef.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ssl.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/e_ostime.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/comp.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/crypto.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/safestack.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/stack.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/types.h:
+/usr/include/x86_64-linux-musl/limits.h:
+/usr/include/x86_64-linux-musl/bits/limits.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/cryptoerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/symhacks.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/cryptoerr_legacy.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/core.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/comperr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bio.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bioerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/x509.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/buffer.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/buffererr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/evp.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/core_dispatch.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/indicator.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/params.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bn.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/bnerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/evperr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/objects.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/obj_mac.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/asn1.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/asn1err.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/objectserr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ec.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ecerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/rsa.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/rsaerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dsa.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dh.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dherr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dsaerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/sha.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/x509err.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/x509_vfy.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/lhash.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pkcs7.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pkcs7err.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/http.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/conf.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/conferr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/conftypes.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pem.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/pemerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/hmac.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/async.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/asyncerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ct.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/cterr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/sslerr.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/sslerr_legacy.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/prov_ssl.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ssl2.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/ssl3.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/tls1.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/dtls1.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/srtp.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/quic.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/rand.h:
+/run/media/jago_dragon/WebDev/Servers-linux/SharedLibs/openssl-static/include/openssl/randerr.h:
+urldata.h:
+cookie.h:
+../include/curl/curl.h:
+../include/curl/curlver.h:
+../include/curl/system.h:
+../include/curl/easy.h:
+../include/curl/multi.h:
+../include/curl/curl.h:
+../include/curl/urlapi.h:
+../include/curl/options.h:
+../include/curl/header.h:
+../include/curl/websockets.h:
+../include/curl/mprintf.h:
+../include/curl/typecheck-gcc.h:
+psl.h:
+formdata.h:
+/usr/include/x86_64-linux-musl/netinet/in.h:
+timeval.h:
+timediff.h:
+http_chunks.h:
+hostip.h:
+hash.h:
+llist.h:
+curl_addrinfo.h:
+/usr/include/x86_64-linux-musl/netdb.h:
+/usr/include/x86_64-linux-musl/arpa/inet.h:
+asyn.h:
+/usr/include/x86_64-linux-musl/setjmp.h:
+/usr/include/x86_64-linux-musl/bits/setjmp.h:
+splay.h:
+dynbuf.h:
+dynhds.h:
+mime.h:
+imap.h:
+pingpong.h:
+curl_sasl.h:
+bufref.h:
+pop3.h:
+smtp.h:
+ftp.h:
+file.h:
+vssh/ssh.h:
+../lib/curl_setup.h:
+http.h:
+bufq.h:
+ws.h:
+rtsp.h:
+smb.h:
+mqtt.h:
+ftplistparser.h:
+multihandle.h:
+conncache.h:
+socketpair.h:
+c-hyper.h:
+cf-socket.h:
+nonblock.h:
+sockaddr.h:
+strcase.h:
+curl_ntlm_core.h:
+curl_md5.h:
+curl_hmac.h:
+warnless.h:
+curl_endian.h:
+curl_des.h:
+curl_md4.h:
+curl_printf.h:
+../include/curl/mprintf.h:
+curl_memory.h:
+memdebug.h:

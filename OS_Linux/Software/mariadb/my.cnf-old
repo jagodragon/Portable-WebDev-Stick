@@ -1,0 +1,17 @@
+[mysqld]
+# Basic Portable Engine Settings
+port = 3306
+socket = ""
+skip-networking = 0
+bind-address = 127.0.0.1
+
+# Point directly to your portable data folder
+datadir = ../../mariadb-data
+
+# Disable user permissions tables for instant out-of-the-box developer access
+skip-grant-tables
+
+# InnoDB Tuning parameters for USB performance
+innodb_buffer_pool_size = 16M
+innodb_log_file_size = 5M
+innodb_flush_log_at_trx_commit = 2

@@ -3,14 +3,17 @@
     admin off
 
     # 2. Global performance buffering optimizations
-    text_mode_logs
+
+    log {
+        format console
+    }
 }
 
 # Your Unified Local Production Site Workspace Root Address Matrix
 http://127.0.0.1:8080 {
 
     # Anchor the web root cleanly relative to your shared website codebase folder
-    root * "../../www"
+    root * "../../../www"
 
     # Route all incoming .php scripts directly to your portable FastCGI process manager gateway
     # This automatically handles script filename translation variables cleanly across operating systems!

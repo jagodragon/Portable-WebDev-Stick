@@ -1,0 +1,18 @@
+#! /bin/sh
+#
+# Created by configure
+
+CC="musl-gcc -static"; export CC
+LDFLAGS="-static --static"; export LDFLAGS
+"./configure" \
+"--prefix=/run/media/jago_dragon/WebDev/Servers-linux/apache-server" \
+"--with-included-apr" \
+"--with-expat=/run/media/jago_dragon/WebDev/ApacheDownloads/expat-static" \
+"--with-pcre=/run/media/jago_dragon/WebDev/ApacheDownloads/pcre2-static/bin/pcre2-config" \
+"--enable-mods-static=all" \
+"--disable-so" \
+"--disable-xml2" \
+"--without-libxml2" \
+"LDFLAGS=-static --static" \
+"CC=musl-gcc -static" \
+"$@"
