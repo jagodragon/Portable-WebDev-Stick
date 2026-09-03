@@ -1,9 +1,0 @@
-[myisam]
-default-storage-engine=myisam
-
-[aria]
-default-storage-engine=aria
-
-[innodb]
-innodb
-default-storage-engine=innodb

@@ -1,2 +1,0 @@
-DROP TABLE t1;
-DROP FUNCTION gtid_eq;

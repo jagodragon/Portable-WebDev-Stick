@@ -1,5 +1,0 @@
-!include my.cnf
-
-[mysqld]
-binlog_directory=binlogs
-loose_innodb_log_file_size=256M

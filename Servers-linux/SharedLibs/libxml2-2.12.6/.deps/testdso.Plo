@@ -1,8 +1,0 @@
-testdso.lo: testdso.c /usr/include/x86_64-linux-musl/stdio.h \
- /usr/include/x86_64-linux-musl/features.h \
- /usr/include/x86_64-linux-musl/bits/alltypes.h \
- include/libxml/xmlexports.h
-/usr/include/x86_64-linux-musl/stdio.h:
-/usr/include/x86_64-linux-musl/features.h:
-/usr/include/x86_64-linux-musl/bits/alltypes.h:
-include/libxml/xmlexports.h:

@@ -1,4 +1,0 @@
---source include/not_embedded.inc
---let $backup_args= --no-lock
---let $copy_back_args=
---source include/mariabackup_slave_provision.inc
