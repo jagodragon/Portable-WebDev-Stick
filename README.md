@@ -263,6 +263,7 @@ The stack currently includes:
 ✅ DBeaver Portable  
 ✅ Windows Support  
 ✅ Linux Support
+✅ Jago pronouncing "conf" like a psychopath
 
 # 📋 Todo
 
