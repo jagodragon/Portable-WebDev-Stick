@@ -80,7 +80,7 @@ WebDev
 │       ├── php-desktop
 │       ├── python
 │       └── redis-server
-├── OS_Linux                  # Single Directory for all things Windows sepcific
+├── OS_Windows                # Single Directory for all things Windows sepcific
 │   ├── DesktopApps           # Preloaded desktop application(s)
 │   │   └── dbeaver-portable
 │   ├── Scripts               # Single point storage for all Windows script
@@ -114,6 +114,10 @@ SharedSettings/
 ├── python-env.sh
 └── redis.conf
 ```
+💡 Quick Linux Mounting Tip:
+If your Linux distribution mounts the ExFAT partition without execution tags by default, mount it via your terminal using mask options to enforce drive-wide execution privileges seamlessly:
+
+sudo mount -t exfat /dev/sdX1 /media/webdev -o uid=1000,gid=1000,fmask=000,dmask=000
 ---
 
 # ⚡ Quick Start (Windows)
@@ -260,3 +264,10 @@ The stack currently includes:
 ✅ Windows Support  
 ✅ Linux Support
 ✅ Jago pronouncing "conf" like a psychopath
+
+# 📋 Todo
+
+- [ ] Add reverse proxy for Node.js
+- [ ] Implement Java for web apps (probably Tomcat)
+- [ ] Add Composer to the toolbox for web devs
+- [ ] Add Symfony to the toolbox for web devs
