@@ -1,0 +1,11 @@
+# Runtime residue — never part of the snapshot
+*.err
+*.pid
+*.rdb
+*.sock
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini

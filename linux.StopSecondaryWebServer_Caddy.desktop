@@ -2,6 +2,6 @@
 Type=Application
 Name=Stop Production Web Server
 Comment=Safely terminates Caddy and background FastCGI web processes
-Exec=bash -c 'cd "$(dirname "%k")/OS_linux/Scripts" && ./StopCaddy.sh'
+Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/Scripts" && ./StopCaddy.sh'
 Icon=process-stop
 Terminal=true
