@@ -1,273 +1,83 @@
-# 🚀 Portable Multi-Platform WebDev Sandbox Station
+# Portable WebDev Stick
 
-A self-contained, portable full-stack web development environment that runs directly from a USB drive on both Windows and Linux without requiring installation, administrator privileges, or modifications to the host operating system.
+A complete web development stack that runs from a USB drive on **Windows and Linux** — no installation, no admin rights, no changes to the host machine. Unplug from one OS, plug into the other, and keep working: same projects, same database, same configuration.
 
-Develop on Windows. Unplug the drive. Plug it into Linux. Continue exactly where you left off using the same databases, project files, and configuration.
+## What's inside
 
----
+- **Apache 2.4** (primary web server) and **Caddy** (fallback)
+- **MariaDB 12.3** — one shared data folder used by both operating systems
+- **PHP 8.4** (mod\_php on Windows, PHP-FPM on Linux)
+- **Node.js 24** and **Python 3.14**
+- **Redis 7.2**
+- **Adminer** — database editor in the browser (see below)
 
-# ✨ Features
+Everything binds to `127.0.0.1` only. Nothing is exposed to the network.
 
-## Cross-Platform Development
+| Service | Port |
+| --- | --- |
+| Web (Apache/Caddy) | 8080 |
+| Node app | 3000 |
+| MariaDB | 3306 |
+| PHP-FPM (Linux) | 9000 |
+| Redis | 6379 |
 
-- Windows x64 support
-- Linux x86_64 support
-- Shared project files
-- Shared database storage
-- Shared configuration files
+## Quick start
 
-## Web Servers
+Start MariaDB first, then a web server:
 
-- Apache HTTP Server
-- Caddy Web Server (Backup/Fallback Server)
+|  | Windows | Linux |
+| --- | --- | --- |
+| Start database | `win.StartMariaDB.bat` | `linux.StartMariaDB.desktop` |
+| Start web server | `win.StartPrimaryWebServer_Apache.bat` | `linux.StartPrimaryWebServer_Apache.desktop` |
+| Stop web server | `win.StopPrimaryWebServer_Apache.bat` | `linux.StopPrimaryWebServer_Apache.desktop` |
+| Stop database | `win.StopMariaDB.bat` | `linux.StopMariaDB.desktop` |
 
-## Backend
+(Caddy variants of the web-server launchers are included as a fallback.) Then open **http://127.0.0.1:8080**.
 
-- PHP
-- Node.js
-- Python
-- Redis
+**Always stop the servers before ejecting the drive**, and never copy the folders while the database is running.
 
-## Databases
+## Working with the database
 
-- MariaDB
+Open **http://127.0.0.1:8080/AdminerEditor/**. The landing page is Adminer Editor — a safe, data-only view. The full Adminer (SQL console, structure, users) is one address away at `…/AdminerEditor/adminer-6.1.2.php`.
 
-## Development Tools
+> **Development status:** MariaDB currently starts without password enforcement so the kit works out of the box. A first-run setup script that sets real passwords is in progress — until it lands, treat this as a local-only development tool (it is; see the loopback note above).
 
-- DBeaver Portable
+## Folder map
 
-## Portable Design
-
-- No installation required
-- No system package modifications
-- Runs entirely from removable storage
-- Shared data and project workspace between operating systems
-
-## Supported Filesystem
 ```text
-✓ ExFAT (Recommended) - Stable and reliable for Linux and Windows
-✓ NTFS (Not Recommended) - Unreliable on Linux but might work depending on your Distro.
+www/             your projects — shared by both OSes
+mariadb-data/    the database — shared, raw, do not hand-edit
+SharedSettings/  one set of configs both OSes read
+SharedFolders/   shared runtime space (temp files, pid files, Redis data)
+OS_Windows/      Windows binaries, scripts, apps
+OS_Linux/        Linux binaries, scripts, apps
+win.* / linux.*  the launchers (this folder)
 ```
 
-## Unsupported Filesystems
-these file system really only work for one operating system
-```text
-✗ FAT32 - Windows Only
-  -Does not preserve Linux file permisions or symbolic links.
-  -The Linux servers in this package will not work with this format.
-✗ VFAT  - Windows Only
-  -Does not preserve Linux file permisions or symbolic links.
-  -The Linux servers in this package will not work with this format.
-✗ ext4  - Linux Only Filesystem
-✗ Btrfs - Linux Only Filesystem
-✗ UDF   - May work but really not suitable for this project
-```
+## Filesystem
 
----
-# 📁 Project Structure
-```text
-WebDev
-├── mariadb-data              # Shared MariaDB data storage
-├── OS_Linux                  # Single Directory for all things Linux sepcific
-│   ├── DesktopApps           # Preloaded desktop application(s)
-│   │   └── dbeaver-portable
-│   ├── Scripts               # Single point storage for all linux script
-│   └── Software              # All software required for Linux server to run
-│       ├── apache-server
-│       ├── caddy-server
-│       ├── mariadb
-│       ├── node-desktop
-│       ├── php-desktop
-│       ├── python
-│       └── redis-server
-├── OS_Windows                # Single Directory for all things Windows sepcific
-│   ├── DesktopApps           # Preloaded desktop application(s)
-│   │   └── dbeaver-portable
-│   ├── Scripts               # Single point storage for all Windows script
-│   └── Software              # All software required for Windows server to run
-│       ├── apache-server
-│       ├── caddy-server
-│       ├── mariadb
-│       ├── node-desktop
-│       ├── php-desktop
-│       ├── python
-│       └── redis-server
-├── SharedSettings            # Shared cross-platform configuration files
-└── www                       # WebHost files
+- **exFAT — recommended.** Works on both OSes.
+- **FAT32/vfat — do not use.** They lose Linux permissions and symlinks; the Linux side will not run.
+- **ext4/Btrfs — Linux only.** Windows can't read the stick.
+- **NTFS — not recommended.** Unreliable under Linux depending on distro.
 
-```
----
+Linux mount tip, if your distro mounts the stick without execute permission:
 
-# 🔧 Shared Configuration Files
-The SharedSettings folder contains configuration files used by both Windows and Linux environments.
----
-```text
-SharedSettings/
-├── Caddyfile
-├── httpd.conf
-├── httpd-ssl.conf (not configured yet)
-├── httpd-vhosts.conf (not configured yet)
-├── mariadb-configs.cnf
-├── node-app.js
-├── php.ini
-├── php-fpm.conf
-├── python-env.sh
-└── redis.conf
-```
-💡 Quick Linux Mounting Tip:
-If your Linux distribution mounts the ExFAT partition without execution tags by default, mount it via your terminal using mask options to enforce drive-wide execution privileges seamlessly:
-
+```bash
 sudo mount -t exfat /dev/sdX1 /media/webdev -o uid=1000,gid=1000,fmask=000,dmask=000
----
-
-# ⚡ Quick Start (Windows)
-
-## Start MariaDB
-
-Run:
-
-win.StartMariaDB.bat
-
-## Start Development Web Server
-
-Run:
-
-win.StartPrimaryWebServer_Apache.bat
-or
-win.StartSecondaryWebServer_Caddy.bat
-
-Then browse to:
-```text
-http://127.0.0.1:8080
 ```
 
-## Stop Services
+## Switching machines
 
-Run:
+1. Stop the web server, then the database.
+2. Eject the drive.
+3. Plug it into the other machine and start the same two launchers.
+4. Continue working. No export or import — the files never moved.
 
-win.StopPrimaryWebServer_Apache.bat
-or
-win.StopSecondaryWebServer_Caddy.bat
+## Status and roadmap
 
-Run:
+Working now: the full stack on Windows and Linux, shared database and webroot, browser-based database editing.
 
-win.StopMariaDB.bat
+In progress: the first-run setup script (real database passwords); a start/stop coordinator that reassigns ports automatically when one is taken. DBeaver Portable is still bundled but is being replaced by Adminer and will be removed.
 
----
-
-# ⚡ Quick Start (Linux)
-
-## Start MariaDB
-
-Run:
-
-linux.StartMariaDB.desktop
-
-## Start Development Web Server
-
-Run:
-
-Linux.StartPrimaryWebServer_Apache.desktop
-or
-Linux.StartSecondaryWebServer_Caddy.desktop
-
-Then browse to:
-```text
-http://127.0.0.1:8080
-```
-
-## Stop Services
-
-Run:
-
-Linux.StopPrimaryWebServer_Apache.desktop
-or
-Linux.StopSecondaryWebServer_Caddy.desktop
-
-Run:
-
-Linux.StopMariaDB.desktop
-
----
-
-# 🔄 Cross Platform Workflow
-
-1. Connect the USB drive to a Windows computer.
-2. Start MariaDB.
-3. Start the prefered web server.
-4. Develop normally.
-5. Shut down services.
-6. Eject the USB drive.
-7. Plug the USB drive into a Linux computer.
-8. Start services.
-9. Continue developing using the same files, databases, and configuration.
-
-No export/import process is required.
-
----
-
-# 🗄️ Database Access Example
-```text
-config.php
-
-<?php
-
-$host    = '127.0.0.1';
-$db      = 'your_database_name';
-$user    = 'webdev';
-$pass    = '';
-$port    = 3306;
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;port=$port;charset=$charset";
-
-$pdo = new PDO(
-    $dsn,
-    $user,
-    $pass,
-    [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false
-    ]
-);
-```
----
-
-# 🎯 Project Goals
-
-- Portable
-- Cross-platform
-- Self-contained
-- Full-stack capable
-- USB-friendly
-- No host system modifications
-- Easy to back up
-- Easy to move between machines
-
----
-
-# 📋 Current Status
-
-Active development.
-
-The stack currently includes:
-
-✅ Apache  
-✅ Caddy  
-✅ MariaDB  
-✅ Redis  
-✅ PHP  
-✅ Node.js  
-✅ Python  
-✅ DBeaver Portable  
-✅ Windows Support  
-✅ Linux Support
-✅ Jago pronouncing "conf" like a psychopath
-
-# 📋 Todo
-
-- [ ] Add reverse proxy for Node.js
-- [ ] Implement Java for web apps (probably Tomcat)
-- [ ] Add Composer to the toolbox for web devs
-- [ ] Add Symfony to the toolbox for web devs
+Planned: reverse proxy for Node apps, Composer in the toolbox.
