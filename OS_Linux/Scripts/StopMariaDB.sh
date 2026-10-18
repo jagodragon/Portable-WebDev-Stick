@@ -1,6 +1,6 @@
 #!/bin/bash
 # Stop MariaDB by pid file — never by process name.
-# Prerequisite: StartMariaDB.sh passes --pid-file="$USB_ROOT/SharedFolders/Data/mariadb.pid"
+# Prerequisite: StartMariaDB.sh passes --pid-file="$USB_ROOT/SharedFolders/data/mariadb.pid"
 cd "$(dirname "$0")"
 USB_ROOT="$(cd ../.. && pwd)"
 PID_FILE="$USB_ROOT/SharedFolders/data/mariadb.pid"

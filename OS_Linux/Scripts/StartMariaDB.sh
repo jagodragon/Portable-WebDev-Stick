@@ -34,4 +34,7 @@ fi
 echo "🚀 Booting Portable MariaDB Server..."
 # FIX (item 8): --datadir quoted (paths with spaces) and taken from USB_ROOT.
 # FIX (item 15): --pid-file added so StopMariaDB.sh can stop THIS server by pid file.
-./../Software/mariadb/bin/mariadbd --datadir="$USB_ROOT/mariadb-data" --pid-file="$USB_ROOT/SharedFolders/Data/mariadb.pid" --defaults-file=../../SharedSettings/mariadb-configs.cnf --socket=/tmp/portable-mariadb.sock --user=root
+# FIX (first Linux boot, Oct 17): --defaults-file MUST be the first argument —
+# MariaDB only honors it in first position; anywhere else it aborts with
+# "unknown variable 'defaults-file=...'". (The Windows .bat always had it first.)
+./../Software/mariadb/bin/mariadbd --defaults-file=../../SharedSettings/mariadb-configs.cnf --datadir="$USB_ROOT/mariadb-data" --pid-file="$USB_ROOT/SharedFolders/data/mariadb.pid" --socket=/tmp/portable-mariadb.sock --user=root
