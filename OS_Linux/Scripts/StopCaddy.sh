@@ -1,9 +1,13 @@
 #!/bin/bash
+# Stop Caddy via its own admin API ("caddy stop") — no process killing at all.
+# Adjust CADDY_BIN if your binary lives somewhere else in the tree.
 cd "$(dirname "$0")"
-echo "🛑 Stopping Production Caddy and FastCGI Processes..."
-# Safely kill the Caddy engine proxy first
-pkill -f caddy_linux_amd64
-# Clean up the background FastCGI process manager
-pkill -f "php-bin -b 127.0.0.1:8080"
-# Clean up any residual routing paths mapped to port 9000
-pkill -f "php-bin -S 127.0.0.1:9000"
+USB_ROOT="$(cd ../.. && pwd)"
+CADDY_BIN="$USB_ROOT/OS_Linux/Software/caddy/caddy_linux_amd64"
+
+echo "🛑 Stopping Portable Caddy..."
+if [ -x "$CADDY_BIN" ]; then
+    "$CADDY_BIN" stop 2>/dev/null && echo "✅ Caddy stopped." || echo "ℹ️ Caddy did not answer — already stopped?"
+else
+    echo "⚠️ Caddy binary not found at $CADDY_BIN — edit CADDY_BIN at the top of this script."
+fi
