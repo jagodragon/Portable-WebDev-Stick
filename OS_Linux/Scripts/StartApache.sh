@@ -5,6 +5,7 @@
 cd "$(dirname "$0")"
 
 USB_ROOT="$(cd ../.. && pwd)"
+export USB_ROOT
 
 # Portable Python Runtime
 export PYTHON_HOME="$USB_ROOT/OS_Linux/Software/python"
@@ -49,7 +50,7 @@ sleep 1
 echo "⚡ Booting Silent Portable PHP FastCGI Gateway on Port 9000..."
 CONF_DIR="$(cd ../../SharedSettings && pwd)"
 
-../Software/php-desktop/php-bin \
+../Software/php-desktop/php-fpm \
     -p "$USB_ROOT/OS_Linux/Software/php-desktop" \
     -c "$CONF_DIR" \
     -d opcache.enable=1 \
