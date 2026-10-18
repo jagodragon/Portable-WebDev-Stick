@@ -63,7 +63,7 @@ echo "🌐 Opening Default Web Browser..."
 xdg-open "http://127.0.0.1:3000"
 
 echo "🚀 Booting Portable Static Apache Web Server on Port 8080..."
-
+export USB_ROOT="$(cd ../.. && pwd)"
 ./../Software/apache-server/bin/httpd -D LIN -D FOREGROUND \
     -d "$USB_ROOT/OS_Linux/Software/apache-server" \
     -f "$USB_ROOT/SharedSettings/httpd.conf"

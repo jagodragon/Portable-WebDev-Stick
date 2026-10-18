@@ -11,7 +11,7 @@ echo 🚀 Booting Isolated Portable MariaDB Engine Node on Port 3306...
 for /f "delims=" %%i in ('cd') do set "USB_ROOT=%%i"
 
 :: Explicitly override internal defaults by passing your shared data paths at runtime
-start /b "MariaDB-Core" "OS_Windows\Software\mariadb\bin\mysqld.exe" --defaults-file="%USB_ROOT%\SharedSettings\mariadb-configs.cnf" --datadir="%USB_ROOT%\mariadb-data"
+start /b "MariaDB-Core" "OS_Windows\Software\mariadb\bin\mysqld.exe" --defaults-file="%USB_ROOT%\SharedSettings\mariadb-configs.cnf" --datadir="%USB_ROOT%\mariadb-data" --pid-file="%USB_ROOT%\SharedFolders\Data\mariadb.pid"
 
 echo ✅ Portable Database Engine is standing up silently in the background!
 timeout /t 2 /nobreak >nul

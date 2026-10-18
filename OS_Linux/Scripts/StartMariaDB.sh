@@ -18,4 +18,5 @@ if [ ! -f "/usr/lib/libcrypt.so.1" ] && [ -f "/usr/lib/libcrypt.so.2" ]; then
 fi
 
 echo "🚀 Booting Portable MariaDB Server..."
-./../Software/mariadb/bin/mariadbd --datadir="$USB_ROOT/mariadb-data" --defaults-file=../../SharedSettings/mariadb-configs.cnf --socket=/tmp/portable-mariadb.sock --user=root
+export USB_ROOT="$(cd ../.. && pwd)"
+./../Software/mariadb/bin/mariadbd --datadir="$USB_ROOT/mariadb-data" --pid-file="$USB_ROOT/SharedFolders/Data/mariadb.pid" --defaults-file=../../SharedSettings/mariadb-configs.cnf --socket=/tmp/portable-mariadb.sock --user=root

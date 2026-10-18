@@ -8,7 +8,7 @@ taskkill /f /im php-cgi.exe >nul 2>&1
 taskkill /f /im redis-server.exe >nul 2>&1
 taskkill /f /im node.exe >nul 2>&1
 
-if exist "%USB_ROOT%\OS_Windows\Software\apache-server\logs\httpd.pid" del /f /q "%USB_ROOT%\Servers-Win\apache-server\logs\httpd.pid"
+if exist "%USB_ROOT%\OS_Windows\Software\apache-server\logs\httpd.pid" del /f /q "%USB_ROOT%\OS_Windows\Software\apache-server\logs\httpd.pid"
 ping 127.0.0.1 -n 2 >nul
 
 echo Booting Isolated Portable Redis Cache Server on Port 6379...

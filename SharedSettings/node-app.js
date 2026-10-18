@@ -23,6 +23,6 @@ const server = http.createServer((req, res) => {
 });
 
 // Bind natively to all local interfaces on port 3000
-server.listen(3000, '0.0.0.0', () => {
+server.listen(3000, '127.0.0.1', () => {
     console.log('Node.js app running natively over port 3000...');
 });
