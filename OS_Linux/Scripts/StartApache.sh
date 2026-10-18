@@ -1,6 +1,6 @@
 #!/bin/bash
 # Automatically anchor execution context relative to this directory pathway
-fuser -k 9000/tcp || true
+# fuser -k 9000/tcp || true
 
 cd "$(dirname "$0")"
 
@@ -17,12 +17,26 @@ echo "🐍 Python Location: $(which python3)"
 echo "🐍 Pip: $(python3 -m pip --version)"
 
 echo "🧹 Sweeping hanging web tasks clean..."
-pkill -9 -f bin/httpd || true
-pkill -9 -f php-bin || true
-pkill -9 -f php-fpm || true
-pkill -9 -f redis-server || true
-pkill -9 -f node-desktop || true
-killall -9 redis-server php-fpm httpd php-bin node 2>/dev/null || true
+#pkill -9 -f bin/httpd || true
+#pkill -9 -f php-bin || true
+#pkill -9 -f php-fpm || true
+#pkill -9 -f redis-server || true
+#pkill -9 -f node-desktop || true
+#pkillall -9 redis-server php-fpm httpd php-bin node 2>/dev/null || true
+# Item 15: stop OUR OWN previous instances by pid file — never by name, image, or port.
+stop_ours() {  # $1 = service name, $2 = pid file
+    local name="$1" pidfile="$2" pid=""
+    [ -f "$pidfile" ] && pid="$(cat "$pidfile")"
+    if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+        echo "Previous $name instance still running (pid $pid) - stopping it first."
+        kill "$pid"
+        for _ in 1 2 3 4 5; do kill -0 "$pid" 2>/dev/null || break; sleep 1; done
+        kill -0 "$pid" 2>/dev/null && kill -9 "$pid"
+    fi
+    rm -f "$pidfile"
+}
+DATA_DIR="$USB_ROOT/SharedFolders/data"
+stop_ours "Apache"  "$DATA_DIR/httpd.pid"
 
 # 🌟 ADD THIS LINE: Force remove any stale Apache pid lock file structures
 rm -f logs/httpd.pid || true
@@ -61,6 +75,7 @@ fi
 echo "🌐 Opening Default Web Browser..."
 # Target your main original 8080 address space layout
 xdg-open "http://127.0.0.1:3000"
+xdg-open "http://127.0.0.1:8080"
 
 echo "🚀 Booting Portable Static Apache Web Server on Port 8080..."
 export USB_ROOT="$(cd ../.. && pwd)"

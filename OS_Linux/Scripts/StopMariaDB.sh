@@ -3,7 +3,7 @@
 # Prerequisite: StartMariaDB.sh passes --pid-file="$USB_ROOT/SharedFolders/Data/mariadb.pid"
 cd "$(dirname "$0")"
 USB_ROOT="$(cd ../.. && pwd)"
-PID_FILE="$USB_ROOT/SharedFolders/Data/mariadb.pid"
+PID_FILE="$USB_ROOT/SharedFolders/data/mariadb.pid"
 
 echo "🛑 Stopping Portable MariaDB Server..."
 if [ -f "$PID_FILE" ]; then

@@ -1,9 +1,9 @@
 #!/bin/bash
 # Stop Apache by pid file — never by process name.
-# Prerequisite: httpd.conf sets  PidFile "${USB_ROOT}/SharedFolders/Data/httpd.pid"
+# Prerequisite: httpd.conf sets  PidFile "${USB_ROOT}/SharedFolders/data/httpd.pid"
 cd "$(dirname "$0")"
 USB_ROOT="$(cd ../.. && pwd)"
-PID_FILE="$USB_ROOT/SharedFolders/Data/httpd.pid"
+PID_FILE="$USB_ROOT/SharedFolders/data/httpd.pid"
 
 echo "🛑 Stopping Portable Apache Web Server..."
 if [ -f "$PID_FILE" ]; then

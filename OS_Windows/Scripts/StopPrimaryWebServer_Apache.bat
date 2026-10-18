@@ -10,9 +10,9 @@ echo ===================================================
 echo   SWEEPING PORTABLE DEV SERVICES - THIS STACK ONLY
 echo ===================================================
 
-:: 1. Apache - by pid file (httpd.conf: PidFile "${USB_ROOT}/SharedFolders/Data/httpd.pid")
+:: 1. Apache - by pid file (httpd.conf: PidFile "${USB_ROOT}/SharedFolders/data/httpd.pid")
 echo Stopping Apache...
-set "PID_FILE=%USB_ROOT%\SharedFolders\Data\httpd.pid"
+set "PID_FILE=%USB_ROOT%\SharedFolders\data\httpd.pid"
 if exist "%PID_FILE%" (
     set /p APID=<"%PID_FILE%"
     taskkill /pid %APID% 2>nul

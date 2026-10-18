@@ -7,7 +7,7 @@ export USB_ROOT
 echo "🧹 Checking for a previous instance of this stack's MariaDB..."
 # If some other MariaDB owns port 3306, mariadbd below will fail to bind with a clear
 # error — which is correct: report the conflict, never clear the field by name.
-PID_FILE="$USB_ROOT/SharedFolders/Data/mariadb.pid"
+PID_FILE="$USB_ROOT/SharedFolders/data/mariadb.pid"
 if [ -f "$PID_FILE" ]; then
     OLD_PID=$(cat "$PID_FILE")
     if [ -n "$OLD_PID" ] && kill -0 "$OLD_PID" 2>/dev/null; then
