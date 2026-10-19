@@ -15,7 +15,7 @@ socket = mariadb.sock
 # datadir = ../../mariadb-data
 
 # Disable user permissions tables for instant out-of-the-box local dev access
-skip-grant-tables
+# skip-grant-tables
 
 # InnoDB Hardware Tuning parameters for USB Sector Protection
 innodb_buffer_pool_size = 16M

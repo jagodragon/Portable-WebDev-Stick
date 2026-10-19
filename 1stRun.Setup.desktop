@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment[en_US]=First-run setup for the Portable WebDev Stick - sets the database passwords and keeps terminal open
+Comment=First-run setup for the Portable WebDev Stick - sets the database passwords and keeps terminal open
+Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/Scripts" && ./1stRun.Setup.sh'
+GenericName[en_US]=
+GenericName=
+Icon=utilities-terminal
+MimeType=
+Name[en_US]=1st Run Setup
+Name=1st Run Setup
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

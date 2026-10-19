@@ -4,6 +4,8 @@
 *.rdb
 *.sock
 *.log
+SharedSettings/db-credentials.php
+ZZ.SyncToStick.*
 
 # OS junk
 .DS_Store
