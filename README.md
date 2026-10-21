@@ -1,4 +1,4 @@
-  # Portable WebDev Stick
+# Portable WebDev Stick
 
 A complete web development stack that runs from a USB drive on **Windows and Linux** — no installation, no admin rights, no changes to the host machine. Unplug from one OS, plug into the other, and keep working: same projects, same database, same configuration.
 
@@ -34,22 +34,32 @@ When setup succeeds, the setup entry points rename themselves to `z.SetupAlready
 
 ## Quick start
 
-Start MariaDB first, then a web server:
+Start MariaDB first, then a web server. The launcher names are the instructions: **work in number order** — the database (1) starts before the web server (2), and stops after it. At the web-server step, pick **one**: Apache (a) is the primary, Caddy (b) the fallback.
 
 |  | Windows | Linux |
 | --- | --- | --- |
-| Start database | `win.StartMariaDB.bat` | `linux.StartMariaDB.desktop` |
-| Start web server | `win.StartPrimaryWebServer_Apache.bat` | `linux.StartPrimaryWebServer_Apache.desktop` |
-| Stop web server | `win.StopPrimaryWebServer_Apache.bat` | `linux.StopPrimaryWebServer_Apache.desktop` |
-| Stop database | `win.StopMariaDB.bat` | `linux.StopMariaDB.desktop` |
+| Start database | `StartupWindows.1_MariaDB.bat` | `StartupLinux.1_MariaDB.desktop` |
+| Start web server — Apache | `StartupWindows.2a_PrimaryWebServer_Apache.bat` | `StartupLinux.2a_PrimaryWebServer_Apache.desktop` |
+| Start web server — Caddy | `StartupWindows.2b_SecondaryWebServer_Caddy.bat` | `StartupLinux.2b_SecondaryWebServer-Caddy.desktop` |
+| Stop web server — Apache | `StopWindows.1a_PrimaryWebServer_Apache.bat` | `StopLinux.1a_PrimaryWebServer_Apache.desktop` |
+| Stop web server — Caddy | `StopWindows.1b_SecondaryWebServer_Caddy.bat` | `StopLinux.1b_SecondaryWebServer-Caddy.desktop` |
+| Stop database | `StopWindows.2_MariaDB.bat` | `StopLinux.2_MariaDB.desktop` |
 
-(Caddy variants of the web-server launchers are included as a fallback.) Then open **http://127.0.0.1:8080**.
+Then open **http://127.0.0.1:8080**.
 
 **Always stop the servers before ejecting the drive**, and never copy the folders while the database is running.
 
 ## Working with the database
 
 Open **http://127.0.0.1:8080/AdminerEditor/** and sign in with the editor username and password you chose during setup. The landing page is Adminer Editor — a safe, data-only view that opens the database you picked at setup (a demo database named `TestTable` by default). The full Adminer (SQL console, structure, users) is one address away at `…/AdminerEditor/adminer-6.1.2.php` — it asks for real database credentials, so use the root or webdev account there.
+
+## Prefer a desktop database editor?
+
+The kit ships the browser editor only, on purpose — it keeps the stick light and free of other projects' licensing terms. If you want a full desktop application, these are free and good; install one on your own machine (or in a folder of your own on the stick):
+
+- **HeidiSQL** (Windows) — the classic MariaDB/MySQL desktop client, with a portable version.
+- **Beekeeper Studio** (Windows, Linux, macOS) — a modern editor; the community edition is free.
+- **DBeaver Community** (Windows, Linux, macOS) — the full-featured option, if you want an IDE-style tool.
 
 ## Folder map
 
@@ -60,7 +70,8 @@ SharedSettings/  one set of configs both OSes read
 SharedFolders/   shared runtime space (temp files, pid files, Redis data)
 OS_Windows/      Windows binaries, scripts, apps
 OS_Linux/        Linux binaries, scripts, apps
-win.* / linux.*  the launchers (this folder)
+1stRun.Setup.*   first-run setup (this folder)
+Startup*/Stop*   the sequenced launchers (this folder)
 ```
 
 ## Filesystem
@@ -85,8 +96,8 @@ sudo mount -t exfat /dev/sdX1 /media/webdev -o uid=1000,gid=1000,fmask=000,dmask
 
 ## Status and roadmap
 
-Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); and browser-based database editing behind your own sign-in.
+Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; and sequenced Startup/Stop launchers whose filenames teach the start and stop order. DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
 
-In progress: unified one-click **Start launchers** that bring the whole stack up in the right order — one per combination (Windows/Linux × Apache/Caddy) — with a **port coordinator** that checks every port before starting anything and moves to a fallback port when one is already taken, instead of failing. DBeaver Portable is still bundled but is being replaced by Adminer and will be removed.
+In progress: a **port coordinator** that checks every port before starting anything and moves to a fallback port when one is already taken, instead of failing.
 
-Planned: SQLite support for lightweight projects that don't need a server database; a bundled Java runtime further out; a bundled git server (Gitea) under evaluation; reverse proxy for Node apps; Composer in the toolbox. A pre-release cleanup pass will retire the remaining debug aids before the kit is published.
+Planned: optional install scripts for the recommended desktop editors above; SQLite support for lightweight projects that don't need a server database; a bundled Java runtime further out; a bundled git server (Gitea) under evaluation; reverse proxy for Node apps; Composer in the toolbox. A pre-release cleanup pass will retire the remaining debug aids before the kit is published.

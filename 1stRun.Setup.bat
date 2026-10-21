@@ -261,6 +261,24 @@ echo  - The stack now starts the normal way (MariaDB first, then a web server).
 echo  - This setup script and the Linux desktop launcher now rename themselves
 echo    to z.SetupAlreadyRan.* and sink to the bottom of the folder. Setup is done.
 echo.
+echo One polite request before you go:
+echo.
+echo ######    ########    ####    ######      ########  ##    ##  ########
+echo ##    ##  ##        ##    ##  ##    ##        ##      ##    ##  ##
+echo ######    ######    ########  ##    ##        ##      ########  ######
+echo ##  ##    ##        ##    ##  ##    ##        ##      ##    ##  ##
+echo ##    ##  ########  ##    ##  ######        ##      ##    ##  ########
+echo.
+echo      ######    ########    ####    ######    ##      ##  ########
+echo      ##    ##  ##        ##    ##  ##    ##  ####  ####  ##
+echo      ######    ######    ########  ##    ##  ##  ##  ##  ######
+echo      ##  ##    ##        ##    ##  ##    ##  ##      ##  ##
+echo      ##    ##  ########  ##    ##  ######    ##      ##  ########
+echo.
+echo Everything important is in README.md at the stick root - what each
+echo launcher does, in what order, and what to do when something goes
+echo wrong. Two minutes there will save you twenty later. Thank you!
+echo.
 exit /b
 
 :fail
