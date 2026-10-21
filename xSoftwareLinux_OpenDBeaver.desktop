@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Open DBeaver Browser
-Comment=Launches native desktop database manager from the flash drive
-Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/DesktopApps/dbeaver-portable" && ./dbeaver -data ./workspace'
-Icon=application-x-executable
-Terminal=false
