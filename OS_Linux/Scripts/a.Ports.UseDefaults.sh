@@ -7,8 +7,13 @@
 # Run it while the stack is STOPPED. It refuses to run while a stack server
 # is alive: the stop scripts resolve ports from the same files, and they
 # must always be able to find the servers they started.
+#
+# Lives in OS_Linux/Scripts; the double-click entry point is
+# a.Ports.UseDefaults.desktop at the stick root.
 
-USB_ROOT="$(cd "$(dirname "$0")" && pwd)"
+# This worker lives in OS_Linux/Scripts; the stick root is two levels up.
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+USB_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 INUSE="$USB_ROOT/SharedSettings/Ports.InUse.conf"
 DATA_DIR="$USB_ROOT/SharedFolders/data"
 

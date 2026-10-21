@@ -61,9 +61,9 @@ Every server binds to `127.0.0.1` on a default port:
 | PHP-FPM (Linux) | 9000 |
 | Node app | 3000 |
 
-The defaults live in `SharedSettings/Ports.Default.conf`, and every launcher takes its ports from there. If a default port is already in use on the machine you're plugged into, run **`a.Ports.FixConflicts`** (`.bat` on Windows, `.sh` on Linux): it tests each default, and for any port that is taken it scans the fallback range declared in the same file's `[DefaultRanges]` section and records the first free port in `SharedSettings/Ports.InUse.conf`. From then on, the launchers use the InUse ports automatically — start the stack the normal way.
+The defaults live in `SharedSettings/Ports.Default.conf`, and every launcher takes its ports from there. If a default port is already in use on the machine you're plugged into, run **`a.Ports.FixConflicts`** (Windows: `a.Ports.FixConflicts.bat`; Linux: double-click `a.Ports.FixConflicts.desktop`): it tests each default, and for any port that is taken it scans the fallback range declared in the same file's `[DefaultRanges]` section and records the first free port in `SharedSettings/Ports.InUse.conf`. From then on, the launchers use the InUse ports automatically — start the stack the normal way.
 
-To go back to the defaults, run **`a.Ports.UseDefaults`**: it deletes `Ports.InUse.conf` and every launcher returns to `Ports.Default.conf`. (If the stack is running, restart it so the change takes effect.)
+To go back to the defaults, run **`a.Ports.UseDefaults`** (Windows: `a.Ports.UseDefaults.bat`; Linux: double-click `a.Ports.UseDefaults.desktop`): it deletes `Ports.InUse.conf` and every launcher returns to `Ports.Default.conf`. (If the stack is running, restart it so the change takes effect.)
 
 If you know your machines, you can edit `Ports.Default.conf` directly: `[DefaultPorts]` sets the ports themselves, and `[DefaultRanges]` sets where the conflict fixer is allowed to hunt. Nothing ever writes to that file but you.
 

@@ -18,8 +18,13 @@
 # they started.
 #
 # To undo a decision, run a.Ports.UseDefaults (it deletes Ports.InUse.conf).
+#
+# Lives in OS_Linux/Scripts; the double-click entry point is
+# a.Ports.FixConflicts.desktop at the stick root.
 
-USB_ROOT="$(cd "$(dirname "$0")" && pwd)"
+# This worker lives in OS_Linux/Scripts; the stick root is two levels up.
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+USB_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SETTINGS="$USB_ROOT/SharedSettings"
 DEFAULTS="$SETTINGS/Ports.Default.conf"
 INUSE="$SETTINGS/Ports.InUse.conf"

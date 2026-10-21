@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=a.Ports Use Defaults
+Name[en_US]=a.Ports Use Defaults
+Comment=Delete Ports.InUse.conf so the stack returns to its default ports
+Comment[en_US]=Delete Ports.InUse.conf so the stack returns to its default ports
+Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/Scripts" && ./a.Ports.UseDefaults.sh'
+Icon=utilities-terminal
+Terminal=true
+StartupNotify=true
+X-KDE-SubstituteUID=false

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=a.Ports Fix Conflicts
+Name[en_US]=a.Ports Fix Conflicts
+Comment=Test the stack's default ports and record free fallbacks in Ports.InUse.conf
+Comment[en_US]=Test the stack's default ports and record free fallbacks in Ports.InUse.conf
+Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/Scripts" && ./a.Ports.FixConflicts.sh'
+Icon=utilities-terminal
+Terminal=true
+StartupNotify=true
+X-KDE-SubstituteUID=false
