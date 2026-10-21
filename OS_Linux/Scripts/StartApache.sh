@@ -7,6 +7,10 @@ cd "$(dirname "$0")"
 USB_ROOT="$(cd ../.. && pwd)"
 export USB_ROOT
 
+# Ports: environment, then Ports.InUse.conf, then Ports.Default.conf.
+. "$(dirname "$0")/ports-resolve.sh"
+resolve_ports  # also exports WEBDEV_PORT_* for httpd, FPM and Node
+
 # Portable Python Runtime
 export PYTHON_HOME="$USB_ROOT/OS_Linux/Software/python"
 export PYTHONNOUSERSITE=1
@@ -43,11 +47,11 @@ stop_ours "Apache"  "$DATA_DIR/httpd.pid"
 rm -f logs/httpd.pid || true
 sleep 1
 
-echo "🧠 Booting Isolated Portable Redis Cache Server on Port 6379..."
-../Software/redis-server/bin/redis-server ../../SharedSettings/redis.conf &
+echo "🧠 Booting Isolated Portable Redis Cache Server on Port $PORT_REDIS..."
+../Software/redis-server/bin/redis-server ../../SharedSettings/redis.conf --port "$PORT_REDIS" &
 sleep 1
 
-echo "⚡ Booting Silent Portable PHP FastCGI Gateway on Port 9000..."
+echo "⚡ Booting Silent Portable PHP FastCGI Gateway on Port $PORT_FPM..."
 CONF_DIR="$(cd ../../SharedSettings && pwd)"
 
 ../Software/php-desktop/php-fpm \
@@ -68,17 +72,17 @@ CONF_DIR="$(cd ../../SharedSettings && pwd)"
 sleep 1
 
 if [ -f "../../SharedSettings/node-app.js" ]; then
-    echo "🟩 Booting Silent Portable JavaScript Backend Runtime Engine on Port 3000..."
+    echo "🟩 Booting Silent Portable JavaScript Backend Runtime Engine on Port $PORT_NODE..."
     ../Software/node-desktop/bin/node "../../SharedSettings/node-app.js" &
     sleep 1
 fi
 
 echo "🌐 Opening Default Web Browser..."
 # Target your main original 8080 address space layout
-xdg-open "http://127.0.0.1:3000"
-xdg-open "http://127.0.0.1:8080"
+xdg-open "http://127.0.0.1:$PORT_NODE"
+xdg-open "http://127.0.0.1:$PORT_WEB"
 
-echo "🚀 Booting Portable Static Apache Web Server on Port 8080..."
+echo "🚀 Booting Portable Static Apache Web Server on Port $PORT_WEB..."
 export USB_ROOT="$(cd ../.. && pwd)"
 ./../Software/apache-server/bin/httpd -D LIN -D FOREGROUND \
     -d "$USB_ROOT/OS_Linux/Software/apache-server" \

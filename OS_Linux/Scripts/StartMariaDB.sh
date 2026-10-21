@@ -4,8 +4,12 @@ cd "$(dirname "$0")"
 USB_ROOT="$(cd ../.. && pwd)"
 export USB_ROOT
 
+# Ports: environment, then Ports.InUse.conf, then Ports.Default.conf.
+. "$(dirname "$0")/ports-resolve.sh"
+resolve_ports
+
 echo "🧹 Checking for a previous instance of this stack's MariaDB..."
-# If some other MariaDB owns port 3306, mariadbd below will fail to bind with a clear
+# If some other MariaDB owns the configured MariaDB port, mariadbd below will fail to bind with a clear
 # error — which is correct: report the conflict, never clear the field by name.
 PID_FILE="$USB_ROOT/SharedFolders/data/mariadb.pid"
 if [ -f "$PID_FILE" ]; then
@@ -37,4 +41,4 @@ echo "🚀 Booting Portable MariaDB Server..."
 # FIX (first Linux boot, Oct 17): --defaults-file MUST be the first argument —
 # MariaDB only honors it in first position; anywhere else it aborts with
 # "unknown variable 'defaults-file=...'". (The Windows .bat always had it first.)
-./../Software/mariadb/bin/mariadbd --defaults-file=../../SharedSettings/mariadb-configs.cnf --datadir="$USB_ROOT/mariadb-data" --pid-file="$USB_ROOT/SharedFolders/data/mariadb.pid" --socket=/tmp/portable-mariadb.sock --user=root
+./../Software/mariadb/bin/mariadbd --defaults-file=../../SharedSettings/mariadb-configs.cnf --datadir="$USB_ROOT/mariadb-data" --pid-file="$USB_ROOT/SharedFolders/data/mariadb.pid" --socket=/tmp/portable-mariadb.sock --port="$PORT_MARIADB" --user=root

@@ -49,6 +49,24 @@ Then open **http://127.0.0.1:8080**.
 
 **Always stop the servers before ejecting the drive**, and never copy the folders while the database is running.
 
+## Port management
+
+Every server binds to `127.0.0.1` on a default port:
+
+| Service | Default port |
+| --- | --- |
+| Web (Apache/Caddy) | 8080 |
+| MariaDB | 3306 |
+| Redis | 6379 |
+| PHP-FPM (Linux) | 9000 |
+| Node app | 3000 |
+
+The defaults live in `SharedSettings/Ports.Default.conf`, and every launcher takes its ports from there. If a default port is already in use on the machine you're plugged into, run **`a.Ports.FixConflicts`** (`.bat` on Windows, `.sh` on Linux): it tests each default, and for any port that is taken it scans the fallback range declared in the same file's `[DefaultRanges]` section and records the first free port in `SharedSettings/Ports.InUse.conf`. From then on, the launchers use the InUse ports automatically — start the stack the normal way.
+
+To go back to the defaults, run **`a.Ports.UseDefaults`**: it deletes `Ports.InUse.conf` and every launcher returns to `Ports.Default.conf`. (If the stack is running, restart it so the change takes effect.)
+
+If you know your machines, you can edit `Ports.Default.conf` directly: `[DefaultPorts]` sets the ports themselves, and `[DefaultRanges]` sets where the conflict fixer is allowed to hunt. Nothing ever writes to that file but you.
+
 ## Working with the database
 
 Open **http://127.0.0.1:8080/AdminerEditor/** and sign in with the editor username and password you chose during setup. The landing page is Adminer Editor — a safe, data-only view that opens the database you picked at setup (a demo database named `TestTable` by default). The full Adminer (SQL console, structure, users) is one address away at `…/AdminerEditor/adminer-6.1.2.php` — it asks for real database credentials, so use the root or webdev account there.
@@ -96,8 +114,8 @@ sudo mount -t exfat /dev/sdX1 /media/webdev -o uid=1000,gid=1000,fmask=000,dmask
 
 ## Status and roadmap
 
-Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; and sequenced Startup/Stop launchers whose filenames teach the start and stop order. DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
+Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; sequenced Startup/Stop launchers whose filenames teach the start and stop order; and port management with declared defaults, an automatic conflict fixer, and a one-click return to defaults (see Port management). DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
 
-In progress: a **port coordinator** that checks every port before starting anything and moves to a fallback port when one is already taken, instead of failing.
+In progress: one-click **stack launchers** driven by the port tools — one per OS and web server — that settle the ports and start the whole stack in dependency order.
 
 Planned: optional install scripts for the recommended desktop editors above; SQLite support for lightweight projects that don't need a server database; a bundled Java runtime further out; a bundled git server (Gitea) under evaluation; reverse proxy for Node apps; Composer in the toolbox. A pre-release cleanup pass will retire the remaining debug aids before the kit is published.

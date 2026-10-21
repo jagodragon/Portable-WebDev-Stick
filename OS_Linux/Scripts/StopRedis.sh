@@ -4,9 +4,13 @@
 cd "$(dirname "$0")"
 USB_ROOT="$(cd ../.. && pwd)"
 
+# Ports: environment, then Ports.InUse.conf, then Ports.Default.conf.
+. "$(dirname "$0")/ports-resolve.sh"
+resolve_ports
+
 echo "🛑 Stopping Portable Redis..."
-if "$USB_ROOT/OS_Linux/Software/redis-server/bin/redis-cli" -h 127.0.0.1 -p 6379 shutdown 2>/dev/null; then
+if "$USB_ROOT/OS_Linux/Software/redis-server/bin/redis-cli" -h 127.0.0.1 -p "$PORT_REDIS" shutdown 2>/dev/null; then
     echo "✅ Redis stopped (snapshot saved)."
 else
-    echo "ℹ️ Redis did not answer on 127.0.0.1:6379 — already stopped?"
+    echo "ℹ️ Redis did not answer on 127.0.0.1:$PORT_REDIS — already stopped?"
 fi

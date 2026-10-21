@@ -45,6 +45,8 @@ set "WORKTMP=%USB_ROOT%\SharedFolders\tmp"
 set "PID_FILE=%RUNTIME%\mariadb.pid"
 set "MARKER=%RUNTIME%\.setup-done"
 set "CREDS_FILE=%SETTINGS%\db-credentials.php"
+set "PORTS_DEFAULT=%SETTINGS%\Ports.Default.conf"
+set "PORTS_INUSE=%SETTINGS%\Ports.InUse.conf"
 set "SQL_TEMPLATE=%SETTINGS%\setup.sql"
 set "GENERATOR=%SETTINGS%\setup-generate.php"
 set "MYSQLD=%USB_ROOT%\OS_Windows\Software\mariadb\bin\mysqld.exe"
@@ -79,6 +81,9 @@ rem ---- Step 2: once per stick ------------------------------------------------
 if exist "%MARKER%" (
     echo First-run setup was already completed for this stick:
     type "%MARKER%"
+    call :init_ports
+    if defined FAILMSG goto :fail
+    echo !PORTS_INIT_MSG!.
     echo Nothing to do. (To run setup again, delete that marker file first.)
     set "SETUP_COMPLETED=1"
     goto :end
@@ -184,6 +189,8 @@ if defined FAILMSG goto :fail
 call :stop_any
 
 rem ---- Step 8: marker, message, and sink out of the way -----------------------
+call :init_ports
+if defined FAILMSG goto :fail
 > "%MARKER%" echo Portable WebDev Stick first-run setup completed.
 >>"%MARKER%" echo Date: %DATE% %TIME%
 >>"%MARKER%" echo Setup version: 1
@@ -245,6 +252,57 @@ set "MYSQL_PWD=%_keep_mysql_pwd%"
 set "_keep_mysql_pwd="
 exit /b
 
+:init_ports
+rem Stamp the active ports file from the declared defaults - unless a port
+rem decision already lives there (a.Ports.FixConflicts wrote it), which
+rem setup must never clobber.
+set "PORTS_INIT_MSG="
+if exist "%PORTS_INUSE%" (
+    findstr /B /C:"[InUsePorts]" "%PORTS_INUSE%" >nul
+    if not errorlevel 1 (
+        set "PORTS_INIT_MSG=existing Ports.InUse.conf kept - it already holds a port decision"
+        exit /b
+    )
+)
+call :conf_get "%PORTS_DEFAULT%" DefaultPorts WEB P_WEB
+if not defined P_WEB set "P_WEB=8080"
+call :conf_get "%PORTS_DEFAULT%" DefaultPorts MARIADB P_MARIADB
+if not defined P_MARIADB set "P_MARIADB=3306"
+call :conf_get "%PORTS_DEFAULT%" DefaultPorts REDIS P_REDIS
+if not defined P_REDIS set "P_REDIS=6379"
+call :conf_get "%PORTS_DEFAULT%" DefaultPorts FPM P_FPM
+if not defined P_FPM set "P_FPM=9000"
+call :conf_get "%PORTS_DEFAULT%" DefaultPorts NODE P_NODE
+if not defined P_NODE set "P_NODE=3000"
+> "%PORTS_INUSE%.tmp" (
+    echo # Ports.InUse.conf - created by 1stRun.Setup from Ports.Default.conf.
+    echo # a.Ports.FixConflicts may rewrite it; a.Ports.UseDefaults removes it.
+    echo SESSION=SETUP %DATE% %TIME% on %COMPUTERNAME%
+    echo.
+    echo [InUsePorts]
+    echo WEB=%P_WEB%
+    echo MARIADB=%P_MARIADB%
+    echo REDIS=%P_REDIS%
+    echo FPM=%P_FPM%
+    echo NODE=%P_NODE%
+)
+if errorlevel 1 set "FAILMSG=could not write Ports.InUse.conf."
+if defined FAILMSG exit /b
+move /y "%PORTS_INUSE%.tmp" "%PORTS_INUSE%" >nul
+if errorlevel 1 set "FAILMSG=could not replace Ports.InUse.conf."
+if defined FAILMSG exit /b
+set "PORTS_INIT_MSG=Ports.InUse.conf created from Ports.Default.conf"
+exit /b
+
+:conf_get
+rem %1 = file, %2 = section, %3 = key, %4 = out var. Empty when not found.
+set "%~4="
+set "CG_FILE=%~1"
+set "CG_SEC=%~2"
+set "CG_KEY=%~3"
+for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "$sec=''; foreach($l in [IO.File]::ReadLines($env:CG_FILE)){ $t=$l.Trim(); if($t.StartsWith('[')){ $sec=$t.Trim('[',']') } elseif($sec -eq $env:CG_SEC){ $kv=$t -split '=',2; if($kv.Count -eq 2 -and $kv[0].Trim() -eq $env:CG_KEY){ $v=($kv[1] -split '[;#]')[0].Trim(); Write-Output $v; break } } }"`) do set "%~4=%%V"
+exit /b
+
 :show_summary
 echo.
 echo ===================================================================
@@ -257,6 +315,7 @@ echo                             secret: never share it, never commit it to git.
 echo  - Database editor:         open http://127.0.0.1:8080/AdminerEditor/ after
 echo                             starting the stack, and sign in with the editor
 echo                             username '%GATE_USER%' and the editor password you set.
+echo  - Ports:                   %PORTS_INIT_MSG%.
 echo  - The stack now starts the normal way (MariaDB first, then a web server).
 echo  - This setup script and the Linux desktop launcher now rename themselves
 echo    to z.SetupAlreadyRan.* and sink to the bottom of the folder. Setup is done.

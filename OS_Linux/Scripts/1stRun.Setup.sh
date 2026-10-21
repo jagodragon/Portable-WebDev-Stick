@@ -17,7 +17,9 @@
 #       by running SharedSettings/setup.sql, then stops it again.
 #    3. Writes SharedSettings/db-credentials.php - the file the database
 #       editor and your projects read to connect. The editor's password is
-#       stored there only as a one-way hash.
+#       stored there only as a one-way hash. Also stamps
+#       SharedSettings/Ports.InUse.conf from Ports.Default.conf, unless a
+#       port decision already exists there.
 #    4. Starts MariaDB normally and PROVES the new state: root without a
 #       password must now FAIL, webdev with its password must succeed.
 #    5. Leaves a marker file (SharedFolders/data/.setup-done) so this setup
@@ -50,6 +52,9 @@ SOCKET="/tmp/portable-mariadb.sock"
 PID_FILE="$RUNTIME/mariadb.pid"
 MARKER="$RUNTIME/.setup-done"
 CREDS_FILE="$SETTINGS/db-credentials.php"
+PORTS_DEFAULT="$SETTINGS/Ports.Default.conf"
+PORTS_INUSE="$SETTINGS/Ports.InUse.conf"
+PORTS_INIT_MSG=""
 SQL_TEMPLATE="$SETTINGS/setup.sql"
 GENERATOR="$SETTINGS/setup-generate.php"
 MARIADBD="$USB_ROOT/OS_Linux/Software/mariadb/bin/mariadbd"
@@ -76,6 +81,51 @@ pause_at_end() {
         read -r _ || true
         printf '\n'
     fi
+}
+
+
+ports_conf_get() {  # $1 = file, $2 = section, $3 = key; prints value or nothing
+    awk -v sec="[$2]" -v key="$3" '
+        { sub(/\r$/, "") }
+        /^\[/ { insec = ($0 == sec); next }
+        insec && $0 ~ "^[ \t]*" key "[ \t]*=" {
+            line = $0
+            sub(/^[^=]*=/, "", line)
+            sub(/[;#].*$/, "", line)
+            gsub(/[ \t]/, "", line)
+            print line; exit
+        }' "$1" 2>/dev/null
+}
+
+init_ports_file() {
+    # Stamp the active ports file from the declared defaults - unless a
+    # port decision already lives there (a.Ports.FixConflicts wrote it),
+    # which setup must never clobber.
+    if [ -f "$PORTS_INUSE" ] && grep -q '^\[InUsePorts\]' "$PORTS_INUSE"; then
+        PORTS_INIT_MSG="existing Ports.InUse.conf kept - it already holds a port decision"
+        return 0
+    fi
+    local web mariadb redis fpm node tmp
+    web="$(ports_conf_get "$PORTS_DEFAULT" DefaultPorts WEB)";         [[ "$web" =~ ^[0-9]+$ ]] || web=8080
+    mariadb="$(ports_conf_get "$PORTS_DEFAULT" DefaultPorts MARIADB)"; [[ "$mariadb" =~ ^[0-9]+$ ]] || mariadb=3306
+    redis="$(ports_conf_get "$PORTS_DEFAULT" DefaultPorts REDIS)";     [[ "$redis" =~ ^[0-9]+$ ]] || redis=6379
+    fpm="$(ports_conf_get "$PORTS_DEFAULT" DefaultPorts FPM)";         [[ "$fpm" =~ ^[0-9]+$ ]] || fpm=9000
+    node="$(ports_conf_get "$PORTS_DEFAULT" DefaultPorts NODE)";       [[ "$node" =~ ^[0-9]+$ ]] || node=3000
+    tmp="$PORTS_INUSE.tmp.$$"
+    {
+        say "# Ports.InUse.conf - created by 1stRun.Setup from Ports.Default.conf."
+        say "# a.Ports.FixConflicts may rewrite it; a.Ports.UseDefaults removes it."
+        say "SESSION=SETUP $(date '+%Y-%m-%d %H:%M') on $(hostname)"
+        say ""
+        say "[InUsePorts]"
+        say "WEB=$web"
+        say "MARIADB=$mariadb"
+        say "REDIS=$redis"
+        say "FPM=$fpm"
+        say "NODE=$node"
+    } > "$tmp" || fail "could not write Ports.InUse.conf."
+    mv -f "$tmp" "$PORTS_INUSE" || fail "could not replace Ports.InUse.conf."
+    PORTS_INIT_MSG="Ports.InUse.conf created from Ports.Default.conf"
 }
 
 fail() { printf '\n*** Setup stopped: %s\n' "$*" >&2; pause_at_end; exit 1; }
@@ -183,6 +233,8 @@ mkdir -p "$RUNTIME" "$WORKTMP"
 if [ -f "$MARKER" ]; then
     say "First-run setup was already completed for this stick:"
     cat "$MARKER"
+    init_ports_file
+    say "$PORTS_INIT_MSG."
     say "Nothing to do. (To run setup again, delete that marker file first.)"
     SETUP_COMPLETED=1   # an earlier, completed setup owns the credentials file
     pause_at_end
@@ -257,6 +309,7 @@ MYSQL_PWD="$ROOT_PW" "$MARIADB" -h 127.0.0.1 -P 3306 -u root -e "SELECT 1" >/dev
 stop_server
 
 # ---- Step 8: marker + summary -----------------------------------------------
+init_ports_file
 {
     echo "Portable WebDev Stick first-run setup completed."
     echo "Date: $(date '+%Y-%m-%d %H:%M:%S %Z')"
@@ -275,6 +328,7 @@ say "                            secret: never share it, never commit it to git.
 say " - Database editor:         open http://127.0.0.1:8080/AdminerEditor/ after"
 say "                            starting the stack, and sign in with the editor"
 say "                            username '$GATE_USER' and the editor password you set."
+say " - Ports:                   $PORTS_INIT_MSG."
 say " - The stack now starts the normal way (MariaDB first, then a web server)."
 say " - The setup entry points at the stick root (the desktop launcher and"
 say "   the Windows script) now rename themselves to z.SetupAlreadyRan.*"
