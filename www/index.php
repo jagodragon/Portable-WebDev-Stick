@@ -4,27 +4,42 @@
  * Automatically provisions missing data architectures seamlessly.
  */
 
-// 1. Establish a raw connection to the MariaDB instance root (without picking a DB yet)
-$host    = '127.0.0.1';
-$user    = 'root';
-$pass    = '';
-$port    = '3306';
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;port=$port;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
+// Connection settings come from SharedSettings/db-credentials.php - the file
+// 1stRun.Setup generates (webdev account + the editor database chosen at
+// setup). Nothing about the connection is hard-coded in this page, so a
+// password set or changed at setup reaches this page on its own.
+$credsFile = __DIR__ . '/../SharedSettings/db-credentials.php';
+$dbname    = 'TestTable'; // fallback only - the credentials file's choice wins
+$charset   = 'utf8mb4';
 
 try {
+    if (!file_exists($credsFile)) {
+        throw new PDOException('SharedSettings/db-credentials.php not found - run 1stRun.Setup first.');
+    }
+    $creds = include $credsFile;
+    $host  = $creds['db']['host'];
+    $user  = $creds['db']['user'];
+    $pass  = $creds['db']['pass'];
+    $port  = $creds['db']['port'];
+    if (!empty($creds['editor']['database'])) {
+        $dbname = $creds['editor']['database'];
+    }
+
+    // 1. Establish a raw connection to the MariaDB instance (without picking a DB yet)
+    $dsn = "mysql:host=$host;port=$port;charset=$charset";
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ];
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     // 2. Automated Provisioning Layer: Force build our missing database container container safely
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS TestTable CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+    // ($dbname comes from the setup-generated file, which only allows letters,
+    // digits and underscores in it - safe inside backticks.)
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
 
     // 3. Now jump cleanly straight into our provisioned schema space
-    $pdo->exec("USE TestTable;");
+    $pdo->exec("USE `$dbname`;");
     $db_status = "CONNECTED & AUTO-PROVISIONED";
 } catch (\PDOException $e) {
     $db_status = "ERROR: " . $e->getMessage();
@@ -55,7 +70,7 @@ h3 { color: #a8a8b3; margin-bottom: 5px; font-size: 16px; }
 
 <hr>
 
-<h3>🗂️ Active Schema Space: <span style="color:#fff;">TestTable</span></h3>
+<h3>🗂️ Active Schema Space: <span style="color:#fff;"><?= htmlspecialchars($dbname) ?></span></h3>
 <h3>📁 Current Custom Tables Vector:</h3>
 <div class="table-list">
 <?php

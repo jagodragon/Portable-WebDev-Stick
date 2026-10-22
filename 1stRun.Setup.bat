@@ -84,7 +84,7 @@ if exist "%MARKER%" (
     call :init_ports
     if defined FAILMSG goto :fail
     echo !PORTS_INIT_MSG!.
-    echo Nothing to do. (To run setup again, delete that marker file first.)
+    echo Nothing to do. To run setup again, delete that marker file first.
     set "SETUP_COMPLETED=1"
     goto :end
 )
@@ -94,7 +94,7 @@ if exist "%PID_FILE%" (
     set /p OLDPID=<"%PID_FILE%"
     if defined OLDPID (
         tasklist /fi "PID eq !OLDPID!" 2>nul | find "!OLDPID!" >nul
-        if not errorlevel 1 set "FAILMSG=MariaDB is running from this stick (pid !OLDPID!). Stop the stack first, then run setup again."
+        if not errorlevel 1 set "FAILMSG=MariaDB is running from this stick, pid !OLDPID!. Stop the stack first, then run setup again."
     )
 )
 if defined FAILMSG goto :fail
@@ -228,11 +228,11 @@ set "_try2="
 call :ask_secret "%~1" _try1
 call :ask_secret "Repeat %~1" _try2
 if not defined _try1 (
-    echo   (must not be empty - try again)
+    echo   must not be empty - try again
     goto :pt_loop
 )
 if not "!_try1!"=="!_try2!" (
-    echo   (the two entries did not match - try again)
+    echo   the two entries did not match - try again
     goto :pt_loop
 )
 set "%~2=!_try1!"
