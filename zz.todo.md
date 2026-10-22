@@ -14,6 +14,7 @@ Updated 2026-10-21
 - [ ] Xdebug toggle for PHP (off by default)
 - [ ] Backup tool (dated zip: www + MariaDB dump + SharedSettings)
 - [ ] Versions report (print the bundled versions in a table)
+- [ ] Improper-shutdown recovery script (find servers left running with no pid file — e.g. after Ctrl+C in a launcher window, where answering N to "Terminate batch job?" resumes the script and the pid file gets deleted under a live server; clear stale pid/lock files only when the process is confirmed dead; gracefully stop or re-adopt orphans; verify MariaDB comes back clean after an unclean stop)
 
 ## Finishing tasks
 

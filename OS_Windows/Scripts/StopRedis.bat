@@ -5,7 +5,7 @@ rem Adjust REDIS_DIR if your Redis binaries live somewhere else in the tree.
 rem (After the setup script adds auth, this needs: redis-cli -a <password> shutdown)
 cd /d "%~dp0"
 set "USB_ROOT=%~dp0..\.."
-set "REDIS_DIR=%USB_ROOT%\OS_Windows\Software\redis"
+set "REDIS_DIR=%USB_ROOT%\OS_Windows\Software\redis-server"
 set "SETTINGS=%USB_ROOT%\SharedSettings"
 call :resolve_port REDIS PORT_REDIS 6379
 
