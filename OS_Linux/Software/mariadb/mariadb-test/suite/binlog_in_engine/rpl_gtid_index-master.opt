@@ -1,3 +1,0 @@
---max-binlog-size=128k
---innodb-binlog-state-interval=64k
---log-bin

@@ -1,3 +1,0 @@
---plugin-load-add=$AUTH_MYSQL_SHA2_SO
---loose-caching-sha2-password
---loose-disable-caching-sha2-password-auto-generate-rsa-keys
