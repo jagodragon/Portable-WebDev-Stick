@@ -27,6 +27,8 @@ set "DEFAULTS=%SETTINGS%\Ports.Default.conf"
 set "INUSE=%SETTINGS%\Ports.InUse.conf"
 set "DATA_DIR=%USB_ROOT%SharedFolders\data"
 
+echo "This takes a minute or two some times. Be patient please."
+
 if not exist "%DEFAULTS%" (
     echo *** Ports.Default.conf not found in SharedSettings - is this script at the stick root?
     goto :fail

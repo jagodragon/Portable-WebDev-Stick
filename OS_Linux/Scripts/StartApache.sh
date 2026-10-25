@@ -48,7 +48,7 @@ rm -f logs/httpd.pid || true
 sleep 1
 
 echo "🧠 Booting Isolated Portable Redis Cache Server on Port $PORT_REDIS..."
-../Software/redis-server/bin/redis-server ../../SharedSettings/redis.conf --port "$PORT_REDIS" &
+../Software/redis-server/bin/redis-server ../../SharedSettings/redis.conf --port "$PORT_REDIS" --dir "$DATA_DIR" &
 sleep 1
 
 echo "⚡ Booting Silent Portable PHP FastCGI Gateway on Port $PORT_FPM..."
