@@ -13,13 +13,13 @@ A complete web development stack that runs from a USB drive on **Windows and Lin
 
 Everything binds to `127.0.0.1` only. Nothing is exposed to the network.
 
-| Service | Port |
-| --- | --- |
-| Web (Apache) | 8080 |
-| Node app | 3000 |
-| MariaDB | 3306 |
+| Service         | Port |
+| --------------- | ---- |
+| Web (Apache)    | 8080 |
+| Node app        | 3000 |
+| MariaDB         | 3306 |
 | PHP-FPM (Linux) | 9000 |
-| Redis | 6379 |
+| Redis           | 6379 |
 
 ## First run — once per stick
 
@@ -36,12 +36,12 @@ When setup succeeds, the setup entry points rename themselves to `z.SetupAlready
 
 Start MariaDB first, then a web server. The launcher names are the instructions: **work in number order** — the database (1) starts before the web server (2), and stops after it.
 
-|  | Windows | Linux |
-| --- | --- | --- |
-| Start database | `StartupWindows.1_MariaDB.bat` | `StartupLinux.1_MariaDB.desktop` |
-| Start web server — Apache | `StartupWindows.2a_PrimaryWebServer_Apache.bat` | `StartupLinux.2a_PrimaryWebServer_Apache.desktop` |
-| Stop web server — Apache | `StopWindows.1a_PrimaryWebServer_Apache.bat` | `StopLinux.1a_PrimaryWebServer_Apache.desktop` |
-| Stop database | `StopWindows.2_MariaDB.bat` | `StopLinux.2_MariaDB.desktop` |
+|                           | Windows                                | Linux                                     |
+| ------------------------- | -------------------------------------- | ----------------------------------------- |
+| Start database            | `StartupWindows.1_MariaDB.bat`         | `StartupLinux.1_MariaDB.desktop`          |
+| Start web server — Apache | `StartupWindows.2_WebServer_Apache.bat` | `StartupLinux.2_WebServer_Apache.desktop` |
+| Stop web server — Apache  | `StopWindows.1_WebServer_Apache.bat`   | `StopLinux.1_WebServer_Apache.desktop`    |
+| Stop database             | `StopWindows.2_MariaDB.bat`            | `StopLinux.2_MariaDB.desktop`             |
 
 Then open **http://127.0.0.1:8080**.
 
@@ -51,13 +51,13 @@ Then open **http://127.0.0.1:8080**.
 
 Every server binds to `127.0.0.1` on a default port:
 
-| Service | Default port |
-| --- | --- |
-| Web (Apache) | 8080 |
-| MariaDB | 3306 |
-| Redis | 6379 |
-| PHP-FPM (Linux) | 9000 |
-| Node app | 3000 |
+| Service         | Default port |
+| --------------- | ------------ |
+| Web (Apache)    | 8080         |
+| MariaDB         | 3306         |
+| Redis           | 6379         |
+| PHP-FPM (Linux) | 9000         |
+| Node app        | 3000         |
 
 The defaults live in `SharedSettings/Ports.Default.conf`, and every launcher takes its ports from there. If a default port is already in use on the machine you're plugged into, run **`a.Ports.FixConflicts`** (Windows: `a.Ports.FixConflicts.bat`; Linux: double-click `a.Ports.FixConflicts.desktop`): it tests each default, and for any port that is taken it scans the fallback range declared in the same file's `[DefaultRanges]` section and records the first free port in `SharedSettings/Ports.InUse.conf`. From then on, the launchers use the InUse ports automatically — start the stack the normal way.
 
