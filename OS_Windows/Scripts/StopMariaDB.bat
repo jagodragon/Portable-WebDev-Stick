@@ -1,8 +1,8 @@
 @echo off
 rem Stop MariaDB by pid file - never by image name.
 rem Prerequisite: win.StartMariaDB.bat passes --pid-file="%USB_ROOT%\SharedFolders\Data\mariadb.pid"
+for %%I in ("%~dp0..\..") do set "USB_ROOT=%%~fI"
 cd /d "%~dp0"
-set "USB_ROOT=%~dp0..\.."
 set "PID_FILE=%USB_ROOT%\SharedFolders\data\mariadb.pid"
 
 echo Stopping Portable MariaDB Server...

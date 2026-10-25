@@ -1,11 +1,12 @@
 @echo off
 title Stopping Web Development Servers...
+setlocal EnableExtensions EnableDelayedExpansion
 rem Pid-file / full-path replacement for the old kill-everything-by-image-name sweep.
 rem The old version killed EVERY httpd.exe / node.exe / redis-server.exe / php.exe
 rem on the machine - including any the host itself was running. This version only
 rem ever touches processes this stack started.
+for %%I in ("%~dp0..\..") do set "USB_ROOT=%%~fI"
 cd /d "%~dp0"
-set "USB_ROOT=%~dp0..\.."
 echo ===================================================
 echo   SWEEPING PORTABLE DEV SERVICES - THIS STACK ONLY
 echo ===================================================
@@ -15,9 +16,9 @@ echo Stopping Apache...
 set "PID_FILE=%USB_ROOT%\SharedFolders\data\httpd.pid"
 if exist "%PID_FILE%" (
     set /p APID=<"%PID_FILE%"
-    taskkill /pid %APID% 2>nul
+    taskkill /pid !APID! 2>nul
     timeout /t 2 /nobreak >nul
-    tasklist /fi "PID eq %APID%" 2>nul | find "%APID%" >nul && taskkill /f /pid %APID% 2>nul
+    tasklist /fi "PID eq !APID!" 2>nul | find "!APID!" >nul && taskkill /f /pid !APID! 2>nul
     del "%PID_FILE%" 2>nul
 ) else (echo   No pid file - Apache not started by this stack.)
 
@@ -32,10 +33,6 @@ powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter \"name='no
 :: 4. Redis - graceful shutdown via redis-cli (saves the snapshot)
 echo Stopping Redis cache...
 call "%USB_ROOT%\OS_Windows\Scripts\StopRedis.bat"
-
-:: 5. Caddy - via its own admin API
-echo Stopping Caddy proxy...
-call "%USB_ROOT%\OS_Windows\Scripts\StopCaddy.bat"
 
 echo ===================================================
 echo   PORTABLE SERVICES STOPPED

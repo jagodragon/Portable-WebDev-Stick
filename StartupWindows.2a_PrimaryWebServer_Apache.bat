@@ -16,7 +16,7 @@ rem echo Sweeping hanging web tasks clean...
 
 echo Booting Isolated Portable Redis Cache Server on Port %PORT_REDIS%...
 
-start "Redis-Server" /min "%USB_ROOT%\OS_Windows\Software\redis-server\redis-server.exe" "%USB_ROOT%\SharedSettings\redis.conf" --port %PORT_REDIS%
+start "Redis-Server" /min "%USB_ROOT%\OS_Windows\Software\redis-server\redis-server.exe" "%USB_ROOT%\SharedSettings\redis.conf" --port %PORT_REDIS% --dir "%USB_ROOT%\SharedFolders\data"
 ping 127.0.0.1 -n 2 >nul
 
 ping 127.0.0.1 -n 2 >nul

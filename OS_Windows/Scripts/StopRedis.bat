@@ -3,8 +3,8 @@ setlocal EnableExtensions EnableDelayedExpansion
 rem Stop Redis the graceful way: redis-cli SHUTDOWN saves the RDB snapshot first.
 rem Adjust REDIS_DIR if your Redis binaries live somewhere else in the tree.
 rem (After the setup script adds auth, this needs: redis-cli -a <password> shutdown)
+for %%I in ("%~dp0..\..") do set "USB_ROOT=%%~fI"
 cd /d "%~dp0"
-set "USB_ROOT=%~dp0..\.."
 set "REDIS_DIR=%USB_ROOT%\OS_Windows\Software\redis-server"
 set "SETTINGS=%USB_ROOT%\SharedSettings"
 call :resolve_port REDIS PORT_REDIS 6379

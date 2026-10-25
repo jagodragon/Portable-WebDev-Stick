@@ -274,6 +274,7 @@ call :conf_get "%PORTS_DEFAULT%" DefaultPorts FPM P_FPM
 if not defined P_FPM set "P_FPM=9000"
 call :conf_get "%PORTS_DEFAULT%" DefaultPorts NODE P_NODE
 if not defined P_NODE set "P_NODE=3000"
+if exist "%PORTS_INUSE%.tmp" del "%PORTS_INUSE%.tmp"
 > "%PORTS_INUSE%.tmp" (
     echo # Ports.InUse.conf - created by 1stRun.Setup from Ports.Default.conf.
     echo # a.Ports.FixConflicts may rewrite it; a.Ports.UseDefaults removes it.
@@ -286,7 +287,7 @@ if not defined P_NODE set "P_NODE=3000"
     echo FPM=%P_FPM%
     echo NODE=%P_NODE%
 )
-if errorlevel 1 set "FAILMSG=could not write Ports.InUse.conf."
+if not exist "%PORTS_INUSE%.tmp" set "FAILMSG=could not write Ports.InUse.conf."
 if defined FAILMSG exit /b
 move /y "%PORTS_INUSE%.tmp" "%PORTS_INUSE%" >nul
 if errorlevel 1 set "FAILMSG=could not replace Ports.InUse.conf."

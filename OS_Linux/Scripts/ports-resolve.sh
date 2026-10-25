@@ -4,7 +4,7 @@
 # directly. The caller must set USB_ROOT first. Calling resolve_ports sets
 # PORT_WEB, PORT_MARIADB, PORT_REDIS, PORT_FPM and PORT_NODE, and exports
 # the matching WEBDEV_PORT_* variables so the servers themselves - httpd's
-# ${} config expansion, Caddy's {$} placeholders, PHP-FPM's listen line
+# ${} config expansion, PHP-FPM's listen line
 # and node-app.js - all see the same decided values.
 #
 # Resolution order, per port:

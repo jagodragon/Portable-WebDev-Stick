@@ -4,7 +4,7 @@ A complete web development stack that runs from a USB drive on **Windows and Lin
 
 ## What's inside
 
-- **Apache 2.4** (primary web server) and **Caddy** (fallback)
+- **Apache 2.4**
 - **MariaDB 12.3** — one shared data folder used by both operating systems
 - **PHP 8.4** (mod\_php on Windows, PHP-FPM on Linux)
 - **Node.js 24** and **Python 3.14**
@@ -15,7 +15,7 @@ Everything binds to `127.0.0.1` only. Nothing is exposed to the network.
 
 | Service | Port |
 | --- | --- |
-| Web (Apache/Caddy) | 8080 |
+| Web (Apache) | 8080 |
 | Node app | 3000 |
 | MariaDB | 3306 |
 | PHP-FPM (Linux) | 9000 |
@@ -34,15 +34,13 @@ When setup succeeds, the setup entry points rename themselves to `z.SetupAlready
 
 ## Quick start
 
-Start MariaDB first, then a web server. The launcher names are the instructions: **work in number order** — the database (1) starts before the web server (2), and stops after it. At the web-server step, pick **one**: Apache (a) is the primary, Caddy (b) the fallback.
+Start MariaDB first, then a web server. The launcher names are the instructions: **work in number order** — the database (1) starts before the web server (2), and stops after it.
 
 |  | Windows | Linux |
 | --- | --- | --- |
 | Start database | `StartupWindows.1_MariaDB.bat` | `StartupLinux.1_MariaDB.desktop` |
 | Start web server — Apache | `StartupWindows.2a_PrimaryWebServer_Apache.bat` | `StartupLinux.2a_PrimaryWebServer_Apache.desktop` |
-| Start web server — Caddy | `StartupWindows.2b_SecondaryWebServer_Caddy.bat` | `StartupLinux.2b_SecondaryWebServer-Caddy.desktop` |
 | Stop web server — Apache | `StopWindows.1a_PrimaryWebServer_Apache.bat` | `StopLinux.1a_PrimaryWebServer_Apache.desktop` |
-| Stop web server — Caddy | `StopWindows.1b_SecondaryWebServer_Caddy.bat` | `StopLinux.1b_SecondaryWebServer-Caddy.desktop` |
 | Stop database | `StopWindows.2_MariaDB.bat` | `StopLinux.2_MariaDB.desktop` |
 
 Then open **http://127.0.0.1:8080**.
@@ -55,7 +53,7 @@ Every server binds to `127.0.0.1` on a default port:
 
 | Service | Default port |
 | --- | --- |
-| Web (Apache/Caddy) | 8080 |
+| Web (Apache) | 8080 |
 | MariaDB | 3306 |
 | Redis | 6379 |
 | PHP-FPM (Linux) | 9000 |
