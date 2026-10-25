@@ -1,26 +1,23 @@
 # Normalize text files to LF in the repo; convert on checkout per the rules below
 * text=auto
-
 # Shell scripts and Linux launchers: LF always, on every OS
 *.sh text eol=lf
 *.desktop text eol=lf
-
 # Windows batch: CRLF always, on every OS
 *.bat text eol=crlf
 *.cmd text eol=crlf
-
 # Shared configs are parsed by both OSes: LF
 *.conf text eol=lf
 *.cnf text eol=lf
 *.ini text eol=lf
-
 # Binaries are never text — never normalize these
 *.exe binary
 *.dll binary
 *.so binary
-
 mariadbd filter=lfs diff=lfs merge=lfs -text
 duckdb.so filter=lfs diff=lfs merge=lfs -text
 ha_duckdb.so filter=lfs diff=lfs merge=lfs -text
 ha_rocksdb.so filter=lfs diff=lfs merge=lfs -text
 node filter=lfs diff=lfs merge=lfs -text
+OS_Linux/Software/php-desktop/bin/php filter=lfs diff=lfs merge=lfs -text
+OS_Linux/Software/php-desktop/php-fpm filter=lfs diff=lfs merge=lfs -text
