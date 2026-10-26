@@ -6,7 +6,8 @@ A complete web development stack that runs from a USB drive on **Windows and Lin
 
 - **Apache 2.4**
 - **MariaDB 12.3** — one shared data folder used by both operating systems
-- **PHP 8.4** (mod\_php on Windows, PHP-FPM on Linux)
+- **SQLite**
+- **PHP 8.5** (mod\_php on Windows, PHP-FPM on Linux)
 - **Node.js 24** and **Python 3.14**
 - **Redis 7.2**
 - **Adminer Editor 6.1.2** — database editing in the browser, behind a sign-in you choose yourself (see First run)
@@ -24,6 +25,8 @@ Everything binds to `127.0.0.1` only. Nothing is exposed to the network.
 ## First run — once per stick
 
 Before the first start, run the setup script once. It takes about a minute.
+(Linux ONLY: Files may be copied to the stick without execute permissions
+run this `chmod -R +x .` in the top level of the usb stick if your scripts refuse to launch.)
 
 - **Windows:** double-click `1stRun.Setup.bat`
 - **Linux:** double-click `1stRun.Setup.desktop`
@@ -36,12 +39,12 @@ When setup succeeds, the setup entry points rename themselves to `z.SetupAlready
 
 Start MariaDB first, then a web server. The launcher names are the instructions: **work in number order** — the database (1) starts before the web server (2), and stops after it.
 
-|                           | Windows                                | Linux                                     |
-| ------------------------- | -------------------------------------- | ----------------------------------------- |
-| Start database            | `StartupWindows.1_MariaDB.bat`         | `StartupLinux.1_MariaDB.desktop`          |
+|                           | Windows                                 | Linux                                     |
+| ------------------------- | --------------------------------------- | ----------------------------------------- |
+| Start database            | `StartupWindows.1_MariaDB.bat`          | `StartupLinux.1_MariaDB.desktop`          |
 | Start web server — Apache | `StartupWindows.2_WebServer_Apache.bat` | `StartupLinux.2_WebServer_Apache.desktop` |
-| Stop web server — Apache  | `StopWindows.1_WebServer_Apache.bat`   | `StopLinux.1_WebServer_Apache.desktop`    |
-| Stop database             | `StopWindows.2_MariaDB.bat`            | `StopLinux.2_MariaDB.desktop`             |
+| Stop web server — Apache  | `StopWindows.1_WebServer_Apache.bat`    | `StopLinux.1_WebServer_Apache.desktop`    |
+| Stop database             | `StopWindows.2_MariaDB.bat`             | `StopLinux.2_MariaDB.desktop`             |
 
 Then open **http://127.0.0.1:8080**.
 
@@ -67,15 +70,42 @@ If you know your machines, you can edit `Ports.Default.conf` directly: `[Default
 
 ## Working with the database
 
-Open **http://127.0.0.1:8080/AdminerEditor/** and sign in with the editor username and password you chose during setup. The landing page is Adminer Editor — a safe, data-only view that opens the database you picked at setup (a demo database named `TestTable` by default). The full Adminer (SQL console, structure, users) is one address away at `…/AdminerEditor/adminer-6.1.2.php` — it asks for real database credentials, so use the root or webdev account there.
+Open **http://127.0.0.1:8080/AdminerEditor/** and sign in with the editor username and password you chose during setup. The landing page is Adminer Editor — a safe, data-only view that opens the database you picked at setup (a demo database named `TestTable` by default). The full Adminer (SQL console, structure, users) is one address away at `…/AdminerEditor/adminer-6.1.2.php` — it asks for real database credentials, so use the root or webdev account there, and set its **Server** field to `127.0.0.1`: the form's `localhost` default connects through a socket file this stack doesn't use, and the login fails with "No such file or directory".
 
 ## Prefer a desktop database editor?
 
 The kit ships the browser editor only, on purpose — it keeps the stick light and free of other projects' licensing terms. If you want a full desktop application, these are free and good; install one on your own machine (or in a folder of your own on the stick):
 
 - **HeidiSQL** (Windows) — the classic MariaDB/MySQL desktop client, with a portable version.
-- **Beekeeper Studio** (Windows, Linux, macOS) — a modern editor; the community edition is free.
-- **DBeaver Community** (Windows, Linux, macOS) — the full-featured option, if you want an IDE-style tool.
+- **Beekeeper Studio** (Windows, Linux) — a modern editor; the community edition is free.
+- **DBeaver Community** (Windows, Linux) — the full-featured option, if you want an IDE-style tool.
+
+## SQLite for lightweight projects
+
+Not every project needs a database server. PHP in this kit has SQLite switched on — the PDO driver and the SQLite3 extension, on Windows and Linux alike — so a project can use a real SQL database that lives in a **single file**: no server to start, no accounts, no passwords.
+
+There is nothing to install and no program to open. Your own PHP code talks to SQLite directly, so using it means adding a few lines to a page in your project and visiting that page in the browser. Try it:
+
+1. Create a text file named `sqlite-test.php` in your project folder inside `www`.
+2. Paste this into it and save:
+
+   ```php
+   <?php
+   $db = new PDO('sqlite:' . __DIR__ . '/app.db');
+   $db->exec('CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, text TEXT)');
+   $db->exec("INSERT INTO notes (text) VALUES ('Hello from SQLite')");
+   foreach ($db->query('SELECT text FROM notes') as $row) {
+       echo $row['text'] . '<br>';
+   }
+   ```
+
+3. Start the web server — the database server can stay off, SQLite doesn't need it — and open **http://127.0.0.1:8080/your-project/sqlite-test.php** in your browser, with your real folder name in place of `your-project`.
+
+The browser shows "Hello from SQLite", and a new file named `app.db` has appeared in the same folder as the script: that file *is* the database. The first line opens it, creating it if it isn't there; `__DIR__` simply means "the folder this script is in", so the database always lands next to the script. Visit the page a second time and the message appears twice — the note from the first visit was still stored in the file. When your own code opens its database, it uses that same first line, pointed at its own file name.
+
+Keep the `.db` file anywhere in the shared folders and the same file opens on both operating systems. One caution: a `.db` file inside `www` can be downloaded by anyone who can reach the site, so if it holds anything you'd mind sharing, keep it outside `www` — a folder of your own at the top level of the stick works well — and point the path at it there.
+
+SQLite allows one writer at a time, which is exactly right for developing and for small personal tools. When a project outgrows that — several people writing at once, or a site you mean to publish — that's the sign to graduate it to MariaDB, which is what the sections above are for. The full Adminer can open a SQLite file too: on its login form, choose **SQLite3** as the system and enter the file's path.
 
 ## Folder map
 
@@ -112,8 +142,24 @@ sudo mount -t exfat /dev/sdX1 /media/webdev -o uid=1000,gid=1000,fmask=000,dmask
 
 ## Status and roadmap
 
-Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; sequenced Startup/Stop launchers whose filenames teach the start and stop order; and port management with declared defaults, an automatic conflict fixer, and a one-click return to defaults (see Port management). DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
+Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; sequenced Startup/Stop launchers whose filenames teach the start and stop order; SQLite switched on in PHP for lightweight projects (see SQLite for lightweight projects); and port management with declared defaults, an automatic conflict fixer, and a one-click return to defaults (see Port management). DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
 
-In progress: one-click **stack launchers** driven by the port tools — one per OS and web server — that settle the ports and start the whole stack in dependency order.
+In progress: one-click **stack launchers** driven by the port tools — one per OS — that settle the ports and start the whole stack in dependency order.
 
-Planned: optional install scripts for the recommended desktop editors above; SQLite support for lightweight projects that don't need a server database; a bundled Java runtime further out; a bundled git server (Gitea) under evaluation; reverse proxy for Node apps; Composer in the toolbox. A pre-release cleanup pass will retire the remaining debug aids before the kit is published.
+Planned: optional install scripts for the recommended desktop editors above; a bundled Java runtime further out; a bundled git server (Gitea) under evaluation; reverse proxy for Node apps; Composer in the toolbox. A pre-release cleanup pass will retire the remaining debug aids before the kit is published.
+
+## Credits
+
+This kit is assembled from free and open-source projects, each used under its own license — the license text ships with each component, as distributed upstream. Thank you to the people who build and maintain them:
+
+- **Apache HTTP Server** — The Apache Software Foundation — Apache License 2.0
+- **MariaDB** — MariaDB Foundation — GNU General Public License v2
+- **PHP** — The PHP Group — PHP License 3.01
+- **SQLite** — D. Richard Hipp and contributors — public domain
+- **Node.js** — OpenJS Foundation and contributors — MIT License
+- **Python** — Python Software Foundation — PSF License
+- **Redis** — Redis Ltd. and contributors — BSD 3-Clause License
+- **Adminer and Adminer Editor** — Jakub Vrána — Apache License 2.0 or GNU GPL v2
+- **curl / libcurl** — Daniel Stenberg and contributors — MIT/X License
+
+The Linux PHP binaries were built from the official PHP sources with **static-php-cli** (MIT License).

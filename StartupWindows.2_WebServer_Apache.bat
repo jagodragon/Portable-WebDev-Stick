@@ -41,6 +41,7 @@ set NODE_HOME=%USB_ROOT%\OS_Windows\Software\node-desktop
 set PYTHON_HOME=%USB_ROOT%\OS_Windows\Software\python\python
 set REDIS_HOME=%USB_ROOT%\OS_Windows\Software\redis-server
 set APACHE_HOME=%USB_ROOT%\OS_Windows\Software\apache-server
+set PHP_INI_SCAN_DIR=%USB_ROOT%\OS_Windows\Software\php-desktop\scan-ini
 
 :: Add portable runtimes to PATH
 set PATH=%PHP_HOME%;%NODE_HOME%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%PATH%
