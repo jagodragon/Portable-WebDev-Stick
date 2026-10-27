@@ -1,0 +1,18 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Comment[en_US]=Repair the Portable WebDev Stick - restores factory settings and setup state; databases and projects are not touched. Keeps terminal open
+Comment=Repair the Portable WebDev Stick - restores factory settings and setup state; databases and projects are not touched. Keeps terminal open
+Exec=bash -c 'cd "$(dirname "%k")/OS_Linux/Scripts" && ./x.RepairStick.sh'
+GenericName[en_US]=
+GenericName=
+Icon=utilities-terminal
+MimeType=
+Name[en_US]=Repair Stick
+Name=Repair Stick
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

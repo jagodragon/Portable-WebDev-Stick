@@ -1,10 +1,11 @@
 # Portable WebDev Stick — To Do
 
-Updated 2026-10-25
+Updated 2026-10-27
 
 ## Features to add
 
-- [ ] SQLite support (enable PHP extensions; dev-only, MariaDB stays the main database)
+- [x] On-stick repair tool (x.RepairStick) — returns the stick's settings and setup state to factory condition from the stick itself (no git, no clone), and never touches databases or projects. DONE 2026-10-27; verified on both OSes (Linux bench copy launched via the .desktop; Windows VM copy by double-clicking the .bat, after a v2 restructure to goto-style — cmd misparses echoed parentheses inside ( ) blocks). It restores every SharedSettings file from the per-file zip copies in SharedFolders/usr/ (built from the tracked configs, extract-verified byte-identical; the payload and the scripts' factory-file list change in the same commit as any SharedSettings change), deletes db-credentials.php and Ports.InUse.conf so the next 1stRun.Setup writes fresh ones and re-keys the root, webdev and editor accounts then, empties SharedFolders/data/ and tmp/ back to their placeholder state, and renames z.SetupAlreadyRan.* back to 1stRun.Setup.*. Fences: refuses while any stack process runs from the stick (pid files plus an executable sweep), stages and verifies every factory copy before overwriting anything, proceeds only on a typed REPAIR. The .bat lives at the stick root; the Linux script lives in OS_Linux/Scripts/ behind the root x.RepairStick.desktop (a double-clicked bare .sh gets no terminal, and the tool is interactive). Program files, www/ and every database are never touched; damaged program files remain the clone-side maintainer reset's job (ZZ.FactoryReset).
+- [x] SQLite support (enable PHP extensions; dev-only, MariaDB stays the main database). DONE 2026-10-25, commit 511b67db "Now supports SQLite"; proof matrix complete on both OSes including a Windows clean install. Linux needed no work (the drivers are compiled into the PHP 8.5 build); Windows loads its DLLs from OS_Windows/Software/php-desktop/scan-ini/extensions.ini, via PHP_INI_SCAN_DIR set in the Apache launcher. The shared php.ini no longer carries extension loads (settings only), so the one-config-for-both-OSes rule holds. README gained the beginner SQLite walkthrough and a Credits section in the same commit.
 - [ ] Composer in the toolbox
 - [ ] Node reverse proxy (serve Node apps through the web server)
 - [ ] Bundled Java runtime (H2 jar rides along in the Java folder)

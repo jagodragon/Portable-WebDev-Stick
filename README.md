@@ -68,6 +68,14 @@ To go back to the defaults, run **`a.Ports.UseDefaults`** (Windows: `a.Ports.Use
 
 If you know your machines, you can edit `Ports.Default.conf` directly: `[DefaultPorts]` sets the ports themselves, and `[DefaultRanges]` sets where the conflict fixer is allowed to hunt. Nothing ever writes to that file but you.
 
+## When settings get tangled
+
+Edited a file in `SharedSettings/` and now the stack won't start, or the ports are in a knot you don't want to untie by hand? Run the repair tool — **Windows:** double-click `x.RepairStick.bat`; **Linux:** double-click `x.RepairStick.desktop`. Stop the servers first: the tool checks, and refuses to run while anything from the stick is still running.
+
+The repair puts every file in `SharedSettings/` back the way the kit shipped, using factory copies built into the stick. It also deletes the credentials file and the port choices recorded during setup, empties the runtime folders, and renames the setup entry points back to `1stRun.Setup.*` — so the finishing step is to run setup once more and choose your passwords again. Until you do, your current passwords keep working.
+
+**Your work is not touched.** Every database and its contents, everything in `www/`, and the program files themselves survive a repair exactly as they were: this tool fixes *settings* — not your data, and not damaged program files. It prints everything it is about to do before it does it, and only proceeds when you type `REPAIR`.
+
 ## Working with the database
 
 Open **http://127.0.0.1:8080/AdminerEditor/** and sign in with the editor username and password you chose during setup. The landing page is Adminer Editor — a safe, data-only view that opens the database you picked at setup (a demo database named `TestTable` by default). The full Adminer (SQL console, structure, users) is one address away at `…/AdminerEditor/adminer-6.1.2.php` — it asks for real database credentials, so use the root or webdev account there, and set its **Server** field to `127.0.0.1`: the form's `localhost` default connects through a socket file this stack doesn't use, and the login fails with "No such file or directory".
@@ -118,6 +126,7 @@ OS_Windows/      Windows binaries, scripts, apps
 OS_Linux/        Linux binaries, scripts, apps
 1stRun.Setup.*   first-run setup (this folder)
 Startup*/Stop*   the sequenced launchers (this folder)
+x.RepairStick.*  the repair tool (this folder; see When settings get tangled)
 ```
 
 ## Filesystem
@@ -142,7 +151,7 @@ sudo mount -t exfat /dev/sdX1 /media/webdev -o uid=1000,gid=1000,fmask=000,dmask
 
 ## Status and roadmap
 
-Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; sequenced Startup/Stop launchers whose filenames teach the start and stop order; SQLite switched on in PHP for lightweight projects (see SQLite for lightweight projects); and port management with declared defaults, an automatic conflict fixer, and a one-click return to defaults (see Port management). DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
+Working now: the full stack on Windows and Linux with a shared database and webroot; a tested first-run setup that gives MariaDB real passwords (no passwordless mode anywhere in the kit); browser-based database editing behind your own sign-in; sequenced Startup/Stop launchers whose filenames teach the start and stop order; SQLite switched on in PHP for lightweight projects (see SQLite for lightweight projects); and port management with declared defaults, an automatic conflict fixer, and a one-click return to defaults (see Port management); and a repair tool that restores factory settings and setup state from the stick itself while leaving databases and projects untouched (see When settings get tangled). DBeaver Portable has been removed — the browser editor is the kit's database tool (desktop suggestions above).
 
 In progress: one-click **stack launchers** driven by the port tools — one per OS — that settle the ports and start the whole stack in dependency order.
 
