@@ -157,6 +157,18 @@ In progress: one-click **stack launchers** driven by the port tools — one per 
 
 Planned: optional install scripts for the recommended desktop editors above; a bundled Java runtime further out; a bundled git server (Gitea) under evaluation; reverse proxy for Node apps; Composer in the toolbox. A pre-release cleanup pass will retire the remaining debug aids before the kit is published.
 
+## License
+
+Copyright (C) 2026 Robert Phillips
+
+The Portable WebDev Stick's own work — its launchers, setup, port, and repair scripts, its configuration files, and this documentation — is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License (GPL-3.0-only).
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+The full license text is in the `LICENSE` file at the top level of this kit, and is also available at <https://www.gnu.org/licenses/>.
+
+This license covers the kit's own work only. The third-party components the kit assembles (listed under Credits below) keep their own licenses, and their license texts ship with each component as distributed upstream; shipping them together in one kit does not change their terms or bring them under this license.
+
 ## Credits
 
 This kit is assembled from free and open-source projects, each used under its own license — the license text ships with each component, as distributed upstream. Thank you to the people who build and maintain them:
